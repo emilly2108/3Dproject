@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    // ½ºÇÇµå Á¶Á¤ º¯¼ö
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
@@ -19,39 +18,36 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
 
 
-    // »óÅÂ º¯¼ö
+
     private bool isWalk = false;
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
 
 
-    // ¿òÁ÷ÀÓ Ã¼Å© º¯¼ö
     private Vector3 lastPos;
 
 
-    // ¾É¾ÒÀ» ¶§ ¾ó¸¶³ª ¾ÉÀ»Áö °áÁ¤ÇÏ´Â º¯¼ö
     [SerializeField]
     private float crouchPosY;
     private float originPosY;
     private float applyCrouchPosY;
 
-    // ¶¥ ÂøÁö ¿©ºÎ
+
     private CapsuleCollider capsuleCollider;
 
 
-    // ¹Î°¨µµ
+
     [SerializeField]
     private float lookSensitivity;
 
 
-    // Ä«¸Þ¶ó ÇÑ°è
     [SerializeField]
     private float cameraRotationLimit;
     private float currentCameraRotationX = 0;
 
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+
     [SerializeField]
     private Camera theCamera;
     private Rigidbody myRigid;
@@ -61,7 +57,7 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
 
-        // ÃÊ±âÈ­
+        // ï¿½Ê±ï¿½È­
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
@@ -79,7 +75,7 @@ public class PlayerController : MonoBehaviour
         CharacterRotation();
     }
 
-    // ¾É±â ½Ãµµ
+    // ï¿½É±ï¿½ ï¿½Ãµï¿½
     private void TryCrouch()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -89,7 +85,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ¾É±â µ¿ÀÛ
+    // ï¿½É±ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Crouch()
     {
         isCrouch = !isCrouch;
@@ -110,7 +106,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ºÎµå·¯¿î µ¿ÀÛ ½ÇÇà
     IEnumerator CrouchCoroutine()
     {
 
@@ -130,14 +125,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // Áö¸é Ã¼Å©
+
     private void IsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
     }
 
 
-    // Á¡ÇÁ ½Ãµµ
+
     private void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
@@ -147,18 +142,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // Á¡ÇÁ
+
     private void Jump()
     {
 
-        // ¾ÉÀº »óÅÂ¿¡¼­ Á¡ÇÁ½Ã ¾ÉÀº »óÅÂ ÇØÁ¦
         if (isCrouch)
             Crouch();
-        myRigid.velocity = transform.up * jumpForce;
+        myRigid.linearVelocity = transform.up * jumpForce;
     }
 
 
-    // ´Þ¸®±â ½Ãµµ
     private void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -172,7 +165,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ´Þ¸®±â ½ÇÇà
+    // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Running()
     {
         if (isCrouch)
@@ -183,7 +176,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ´Þ¸®±â Ãë¼Ò
+    // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     private void RunningCancel()
     {
         isRun = false;
@@ -191,7 +184,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ¿òÁ÷ÀÓ ½ÇÇà
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -206,7 +199,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ¿òÁ÷ÀÓ Ã¼Å©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
     private void MoveCheck()
     {
         if (!isRun && !isCrouch && isGround)
@@ -220,7 +213,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ÁÂ¿ì Ä³¸¯ÅÍ È¸Àü
+    // ï¿½Â¿ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
     private void CharacterRotation()
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");
@@ -230,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // »óÇÏ Ä«¸Þ¶ó È¸Àü
+    // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½
     private void CameraRotation()
     {
         if (!pauseCameraRotation)
@@ -265,7 +258,7 @@ public class PlayerController : MonoBehaviour
         pauseCameraRotation = false;
     }
 
-    // »óÅÂ º¯¼ö °ª ¹ÝÈ¯
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
     public bool GetRun()
     {
         return isRun;
