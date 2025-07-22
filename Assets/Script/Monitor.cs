@@ -19,9 +19,8 @@ public class Monitor : MonoBehaviour
     // bool값
     private bool Openscreen = false;
     private bool IsTouch = false;
-    private bool Opentext = false;
 
-    public OpenDoor opendoor;
+    public Door door;
     public Paper paper;
     public Case Case;
     void Start()
@@ -36,7 +35,6 @@ public class Monitor : MonoBehaviour
         TryCloseScreen();
         OpenPaper();
         TryOpenCase();
-        TryOpenDoor();
     }
 
 
@@ -51,7 +49,6 @@ public class Monitor : MonoBehaviour
                 if(hit.transform.CompareTag("PC"))
                 {
                     TextUI.text = " 화면을 보려면 (Z)키를 누르세요";
-                    Opentext = true;
                     if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Text_UI.SetActive(false);
@@ -83,24 +80,19 @@ public class Monitor : MonoBehaviour
     //상호작용키 지우기
     public void CloseText()
     {
-        if (Opentext == true)
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
+        if (IsTouch)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-            RaycastHit hit;
-            IsTouch = Physics.Raycast(ray, out hit, 0.7f);
-            if (IsTouch)
+            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case"))
             {
-                if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door")  && !hit.transform.CompareTag("Paper")&&!hit.transform.CompareTag("Case"))
-                {
-                    TextUI.text = " ";
-                    Opentext = false;
-                }
+                TextUI.text = " ";
             }
-            else
-            {
-                TextUI.text = "";
-                Opentext = false;
-            }
+        }
+        else
+        {
+            TextUI.text = "";
         }
     }
 
@@ -115,7 +107,6 @@ public class Monitor : MonoBehaviour
             if (hit.transform.CompareTag("Paper"))
             {
                 TextUI.text = "종이를 보려면 (Z)키를 누르세요";
-                Opentext = true;
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
                     paper.OpenPaper();
@@ -139,65 +130,11 @@ public class Monitor : MonoBehaviour
             if (hit.transform.CompareTag("Case"))
             {
                 TextUI.text = "서랍을 열려면 (Z)키를 누르세요";
-                Opentext = true;
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
                     Case.OpenCase();
                     Text_UI.SetActive(false);
                     Crosshair.SetActive(false);
-                }
-
-            }
-        }
-    }
-
-    private void TryOpenDoor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
-        if (IsTouch)
-        {
-            if (hit.transform.CompareTag("Door"))
-            {
-                TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                Opentext = true;
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    if (hit.transform.gameObject.name == ("Room1_Door"))
-                    {
-                        opendoor.OpenDoor1();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room2_Door"))
-                    {
-                        opendoor.OpenDoor2();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room3_Door"))
-                    {
-                        opendoor.OpenDoor3();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room4_Door"))
-                    {
-                        opendoor.OpenDoor4();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room5_Door"))
-                    {
-                        opendoor.OpenDoor5();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room6_Door"))
-                    {
-                        opendoor.OpenDoor6();
-                    }
-
-                    else if (hit.transform.gameObject.name == ("Room7_Door"))
-                    {
-                        opendoor.OpenDoor7();
-                    }
                 }
 
             }
