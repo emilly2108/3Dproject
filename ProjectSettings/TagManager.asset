@@ -8,6 +8,7 @@ TagManager:
   - PC
   - Case
   - Paper
+  - Interactable
   layers:
   - Default
   - TransparentFX

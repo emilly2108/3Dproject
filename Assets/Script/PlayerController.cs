@@ -4,187 +4,84 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
     private float runSpeed;
-    [SerializeField]
-    private float crouchSpeed;
-
     private float applySpeed;
 
     [SerializeField]
     private float jumpForce;
 
-
-
-    private bool isWalk = false;
     private bool isRun = false;
-    private bool isCrouch = false;
     private bool isGround = true;
-
 
     private Vector3 lastPos;
 
-
-    [SerializeField]
-    private float crouchPosY;
-    private float originPosY;
-    private float applyCrouchPosY;
-
-
-    private CapsuleCollider capsuleCollider;
-
-
-
     [SerializeField]
     private float lookSensitivity;
-
-
     [SerializeField]
     private float cameraRotationLimit;
     private float currentCameraRotationX = 0;
 
-
-
     [SerializeField]
     private Camera theCamera;
+
     private Rigidbody myRigid;
+
+    [SerializeField]
+    private float rotationSpeed;
+
+    private bool isDraggingCamera = false;
 
     void Start()
     {
-        capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
-
-        // ï¿½Ê±ï¿½È­
         applySpeed = walkSpeed;
-        originPosY = theCamera.transform.localPosition.y;
-        applyCrouchPosY = originPosY;
+        Cursor.lockState = CursorLockMode.None;  // ¸¶¿ì½º Ä¿¼­ Á¦ÇÑ ¾øÀ½
+        Cursor.visible = true;                   // ¸¶¿ì½º Ä¿¼­ º¸ÀÌ±â
     }
+
     void Update()
     {
-
         IsGround();
         TryJump();
         TryRun();
-        TryCrouch();
         Move();
         MoveCheck();
-        CameraRotation();
-        CharacterRotation();
-    }
 
-    // ï¿½É±ï¿½ ï¿½Ãµï¿½
-    private void TryCrouch()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        // ¸¶¿ì½º ÁÂÅ¬¸¯ ½Ã È¸Àü ½ÃÀÛ
+        if (Input.GetMouseButtonDown(0))
         {
-            Crouch();
+            isDraggingCamera = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isDraggingCamera = false;
+        }
+
+        if (isDraggingCamera)
+        {
+            CameraRotation();
+            CharacterRotation();
         }
     }
 
-
-    // ï¿½É±ï¿½ ï¿½ï¿½ï¿½ï¿½
-    private void Crouch()
+    private void TryRun()
     {
-        isCrouch = !isCrouch;
-
-        if (isCrouch)
-        {
-            applySpeed = crouchSpeed;
-            applyCrouchPosY = crouchPosY;
-        }
-        else
-        {
-            applySpeed = walkSpeed;
-            applyCrouchPosY = originPosY;
-        }
-
-        StartCoroutine(CrouchCoroutine());
-
+        isRun = Input.GetKey(KeyCode.LeftShift);
+        applySpeed = isRun ? runSpeed : walkSpeed;
     }
-
-
-    IEnumerator CrouchCoroutine()
-    {
-
-        float _posY = theCamera.transform.localPosition.y;
-        int count = 0;
-
-        while (_posY != applyCrouchPosY)
-        {
-            count++;
-            _posY = Mathf.Lerp(_posY, applyCrouchPosY, 0.3f);
-            theCamera.transform.localPosition = new Vector3(0, _posY, 0);
-            if (count > 15)
-                break;
-            yield return null;
-        }
-        theCamera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0f);
-    }
-
-
-
-    private void IsGround()
-    {
-        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
-    }
-
-
 
     private void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            Jump();
+            myRigid.linearVelocity = new Vector3(myRigid.linearVelocity.x, 0f, myRigid.linearVelocity.z);
+            myRigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-
-
-    private void Jump()
-    {
-
-        if (isCrouch)
-            Crouch();
-        myRigid.linearVelocity = transform.up * jumpForce;
-    }
-
-
-    private void TryRun()
-    {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Running();
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            RunningCancel();
-        }
-    }
-
-
-    // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    private void Running()
-    {
-        if (isCrouch)
-            Crouch();
-
-        isRun = true;
-        applySpeed = runSpeed;
-    }
-
-
-    // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-    private void RunningCancel()
-    {
-        isRun = false;
-        applySpeed = walkSpeed;
-    }
-
-
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -198,83 +95,34 @@ public class PlayerController : MonoBehaviour
         myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
     }
 
-
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
     private void MoveCheck()
     {
-        if (!isRun && !isCrouch && isGround)
+        if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
         {
-            if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
-                isWalk = true;
-            else
-                isWalk = false;
             lastPos = transform.position;
         }
     }
 
+    private void IsGround()
+    {
+        isGround = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+    }
 
-    // ï¿½Â¿ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
     private void CharacterRotation()
     {
-        float _yRotation = Input.GetAxisRaw("Mouse X");
+        float _yRotation = Input.GetAxis("Mouse X");
         Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
         myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
     }
 
-
-
-    // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½
     private void CameraRotation()
     {
-        if (!pauseCameraRotation)
-        {
-            float _xRotation = Input.GetAxisRaw("Mouse Y");
-            float _cameraRotationX = _xRotation * lookSensitivity;
-            currentCameraRotationX -= _cameraRotationX;
-            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+        float _xRotation = Input.GetAxis("Mouse Y");
+        float _cameraRotationX = _xRotation * lookSensitivity;
 
-            theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-        }
-    }
+        currentCameraRotationX -= _cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
-    private bool pauseCameraRotation = false;
-
-    public IEnumerator TreeLookCoroutine(Vector3 _target)
-    {
-        pauseCameraRotation = true;
-
-        Quaternion direction = Quaternion.LookRotation(_target - theCamera.transform.position);
-        Vector3 eulerValue = direction.eulerAngles;
-        float destinationX = eulerValue.x;
-
-        while (Mathf.Abs(destinationX - currentCameraRotationX) >= 0.5f)
-        {
-            eulerValue = Quaternion.Lerp(theCamera.transform.localRotation, direction, 0.3f).eulerAngles;
-            theCamera.transform.localRotation = Quaternion.Euler(eulerValue.x, 0f, 0f);
-            currentCameraRotationX = theCamera.transform.localEulerAngles.x;
-            yield return null;
-        }
-
-        pauseCameraRotation = false;
-    }
-
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
-    public bool GetRun()
-    {
-        return isRun;
-    }
-    public bool GetWalk()
-    {
-        return isWalk;
-    }
-    public bool GetCrouch()
-    {
-        return isCrouch;
-    }
-    public bool GetIsGround()
-    {
-        return isGround;
+        theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
 }
-
-
