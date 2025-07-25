@@ -30,37 +30,58 @@ public class InteractionDetector : MonoBehaviour
             {
                 GameObject targetUI = quizUI[index];
 
+                // Z 또는 Enter 입력 시
                 if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
                 {
                     if (currentTargetTag == "Door")
                     {
                         var lockInfo = passwordManager.GetLockInfoByName(currentTargetInfo.objectName);
-
                         if (lockInfo != null)
                         {
                             passwordManager.TryToggleDoor(lockInfo, this);
-
+                            if (!lockInfo.isSolved && !targetUI.activeSelf)
+                                targetUI.SetActive(true);
+                        }
+                    }
+                    else if (currentTargetTag == "Case")
+                    {
+                        var lockInfo = passwordManager.GetLockInfoByName(currentTargetInfo.objectName);
+                        if (lockInfo != null)
+                        {
                             if (!lockInfo.isSolved && !targetUI.activeSelf)
                             {
-                                Debug.Log("자물쇠 표시됨 (문)");
-                                targetUI.SetActive(true);
+                                targetUI.SetActive(true); // 퍼즐 UI 띄우기
+                            }
+                            else if (lockInfo.isSolved)
+                            {
+                                // 🔥 케이스는 문처럼 열지 않고 비활성화 처리
+                                if (lockInfo.doorObject != null && lockInfo.doorObject.activeSelf)
+                                {
+                                    lockInfo.doorObject.SetActive(false);
+                                }
                             }
                         }
                     }
+
                     else if (currentTargetTag == interactableTag)
                     {
-                        if (!targetUI.activeSelf)
+
+                        if (index >= 0 && index < quizUI.Count && !targetUI.activeSelf)
                         {
-                            Debug.Log("퀴즈 UI 표시됨 (일반 인터랙터블)");
-                            targetUI.SetActive(true);
+                            targetUI.SetActive(true); // 퀴즈 UI 표시
                         }
                     }
                 }
 
-                if (Input.GetKeyDown(KeyCode.R) && targetUI.activeSelf)
+
+                if (Input.GetKeyDown(KeyCode.R))
                 {
-                    targetUI.SetActive(false);
+                    if (targetUI.activeSelf)
+                        targetUI.SetActive(false);
+
+
                 }
+
             }
         }
     }
@@ -71,7 +92,7 @@ public class InteractionDetector : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactRange))
         {
-            if (hit.collider.CompareTag(interactableTag) || hit.collider.CompareTag("Door"))
+            if (hit.collider.CompareTag(interactableTag) || hit.collider.CompareTag("Door") || hit.collider.CompareTag("Case"))
             {
                 string hitName = hit.collider.name;
                 string tag = hit.collider.tag;
