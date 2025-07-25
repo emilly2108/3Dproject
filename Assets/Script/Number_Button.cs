@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -21,6 +21,7 @@ public class Number_Button : MonoBehaviour
 
     public void OnButtonPressed()
     {
+        Debug.Log("버튼1 눌림");
         currentNumber++;
         if (currentNumber >= 10)
         {

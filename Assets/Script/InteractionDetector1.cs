@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class InteractionDetector : MonoBehaviour
+public class InteractionDetector1 : MonoBehaviour
 {
     [SerializeField] private float interactRange = 3f;
     [SerializeField] private string interactableTag = "Interactable";
@@ -16,7 +16,6 @@ public class InteractionDetector : MonoBehaviour
 
     private bool isDescriptionVisible = false;
     private InteractableInfo currentTargetInfo = null;
-    private string currentTargetTag = ""; // 🔥 현재 오브젝트 태그 기억용
 
     void Update()
     {
@@ -30,32 +29,26 @@ public class InteractionDetector : MonoBehaviour
             {
                 GameObject targetUI = quizUI[index];
 
+                // Z 또는 Enter 입력 시
                 if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (currentTargetTag == "Door")
-                    {
-                        var lockInfo = passwordManager.GetLockInfoByName(currentTargetInfo.objectName);
+                    var lockInfo = passwordManager.GetLockInfoByName(currentTargetInfo.objectName);
 
-                        if (lockInfo != null)
-                        {
-                            passwordManager.TryToggleDoor(lockInfo, this);
-
-                            if (!lockInfo.isSolved && !targetUI.activeSelf)
-                            {
-                                Debug.Log("자물쇠 표시됨 (문)");
-                                targetUI.SetActive(true);
-                            }
-                        }
-                    }
-                    else if (currentTargetTag == interactableTag)
+                    if (lockInfo != null)
                     {
-                        if (!targetUI.activeSelf)
+                        passwordManager.TryToggleDoor(lockInfo, this);
+
+                        if (!lockInfo.isSolved && !targetUI.activeSelf)
                         {
-                            Debug.Log("퀴즈 UI 표시됨 (일반 인터랙터블)");
+                            Debug.Log("자물쇠 표시됨");
+                            Debug.Log($"[Detector] lockInfo.isSolved: {lockInfo.isSolved}, object: {lockInfo}");
+
                             targetUI.SetActive(true);
                         }
                     }
+
                 }
+
 
                 if (Input.GetKeyDown(KeyCode.R) && targetUI.activeSelf)
                 {
@@ -74,7 +67,6 @@ public class InteractionDetector : MonoBehaviour
             if (hit.collider.CompareTag(interactableTag) || hit.collider.CompareTag("Door"))
             {
                 string hitName = hit.collider.name;
-                string tag = hit.collider.tag;
 
                 InteractableInfo info = interactableInfos.Find(i => i.objectName == hitName);
 
@@ -88,7 +80,6 @@ public class InteractionDetector : MonoBehaviour
                     }
 
                     currentTargetInfo = info;
-                    currentTargetTag = tag; // 현재 감지된 오브젝트의 태그 저장
                     return;
                 }
             }
@@ -102,6 +93,5 @@ public class InteractionDetector : MonoBehaviour
         }
 
         currentTargetInfo = null;
-        currentTargetTag = "";
     }
 }

@@ -3,7 +3,8 @@
 [System.Serializable]
 public class InteractableInfo
 {
-    public string objectName;         // 예: "PC_Monitor"
-    public string descriptionText;    // 예: "모니터"
-    public int quizUIIndex;           // quizUIs 리스트에서 사용할 인덱스
+    public string objectName;         // 오브젝트 이름 (GameObject.name)
+    public string descriptionText;    // 화면에 띄울 설명
+    public int quizUIIndex = -1;      // 퀴즈 UI 인덱스 (-1은 없음)
+    //public DoorLockInfo doorLockInfo; // 문 퍼즐 정보 (nullable)
 }

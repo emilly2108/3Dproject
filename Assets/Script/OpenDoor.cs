@@ -1,16 +1,16 @@
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
-    //¿òÁ÷ÀÌ´Â ½Ã°£
     public float moveDuration = 1f;
-    //¿òÁ÷ÀÌ´Â ±âÁØ
     public Transform doorHinge;
+    public MessageDisplayer messageDisplayer; // âœ… ë©”ì‹œì§€ ì¶œë ¥ê¸° ì°¸ì¡° ì¶”ê°€
 
-    //´ÝÈú °¢µµ= 0
     private Quaternion closedRotation;
-    //¿­¸± °¢µµ= 60
     private Quaternion openRotation;
+
+    public bool isOpen = false;
 
     private void Start()
     {
@@ -18,7 +18,21 @@ public class OpenDoor : MonoBehaviour
         openRotation = closedRotation * Quaternion.Euler(0, 60f, 0);
     }
 
-    public System.Collections.IEnumerator DoorMoveOpen()
+    public void ToggleDoor(MonoBehaviour context)
+    {
+        if (isOpen)
+        {
+            context.StartCoroutine(DoorMoveClose());
+        }
+        else
+        {
+            context.StartCoroutine(DoorMoveOpen());
+        }
+
+        isOpen = !isOpen;
+    }
+
+    public IEnumerator DoorMoveOpen()
     {
         float elapsedTime = 0f;
         while (elapsedTime < moveDuration)
@@ -28,18 +42,23 @@ public class OpenDoor : MonoBehaviour
             yield return null;
         }
         doorHinge.rotation = openRotation;
+
+        // âœ… ë¬¸ì´ ì—´ë¦¼ ë©”ì‹œì§€
+        messageDisplayer?.ShowMessage("ë¬¸ì´ ì—´ë ¸ë‹¤.");
     }
 
-
-    public System.Collections.IEnumerator DoorMoveClose()
+    public IEnumerator DoorMoveClose()
     {
         float elapsedTime = 0f;
         while (elapsedTime < moveDuration)
         {
-            doorHinge.rotation = Quaternion.Lerp(openRotation,closedRotation,  elapsedTime / moveDuration);
+            doorHinge.rotation = Quaternion.Lerp(openRotation, closedRotation, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         doorHinge.rotation = closedRotation;
+
+        // âœ… ë¬¸ì´ ë‹«íž˜ ë©”ì‹œì§€
+        messageDisplayer?.ShowMessage("ë¬¸ì´ ë‹«í˜”ë‹¤.");
     }
 }
