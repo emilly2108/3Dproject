@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Number_Button : MonoBehaviour
 {
+    //✅
     [SerializeField]
     private TextMeshProUGUI number;
 

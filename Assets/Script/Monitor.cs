@@ -1,10 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class Monitor : MonoBehaviour
 {
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //âœ…
+    [SerializeField] public PlayerController playerController;
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private GameObject Room1_Monitor;
     [SerializeField]
@@ -16,7 +18,7 @@ public class Monitor : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI TextUI;
 
-    // bool°ª
+    // boolê°’
     private bool Openscreen = false;
     private bool IsTouch = false;
 
@@ -38,7 +40,7 @@ public class Monitor : MonoBehaviour
     }
 
 
-    //¸ğ´ÏÅÍ º¸±â
+    //ëª¨ë‹ˆí„° ë³´ê¸°
     private void TryOpenScreen()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -48,26 +50,29 @@ public class Monitor : MonoBehaviour
             {
                 if(hit.transform.CompareTag("PC"))
                 {
-                    TextUI.text = " È­¸éÀ» º¸·Á¸é (Z)Å°¸¦ ´©¸£¼¼¿ä";
+                    TextUI.text = " í™”ë©´ì„ ë³´ë ¤ë©´ (Z)í‚¤ë¥¼ ëˆ„ë¥´ì„¸ìš”";
                     if (Input.GetKeyDown(KeyCode.Z))
                         {
+                            playerController.SetCanMove(false);  // ì´ë™ ê¸ˆì§€
                             Text_UI.SetActive(false);
                             Crosshair.SetActive(false);
                             Room1MQ.SetActive(true);
                             Openscreen = true;
                         }
+
                     
                 }
             }
     }
 
-    //¸ğ´ÏÅÍ ´İ±â
+    //ëª¨ë‹ˆí„° ë‹«ê¸°
     private void TryCloseScreen()
     {
         if(Openscreen == true)
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
+                playerController.SetCanMove(true); //ì´ë™ í—ˆìš©
                 Text_UI.SetActive(true);
                 Crosshair.SetActive(true);
                 Room1MQ.SetActive(false);
@@ -77,7 +82,7 @@ public class Monitor : MonoBehaviour
 
     }
 
-    //»óÈ£ÀÛ¿ëÅ° Áö¿ì±â
+    //ìƒí˜¸ì‘ìš©í‚¤ ì§€ìš°ê¸°
     public void CloseText()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -96,7 +101,7 @@ public class Monitor : MonoBehaviour
         }
     }
 
-    //Á¾ÀÌº¸´Â »óÈ£ÀÛ¿ëÅ° ¶ç¿ì±â
+    //ì¢…ì´ë³´ëŠ” ìƒí˜¸ì‘ìš©í‚¤ ë„ìš°ê¸°
     private void OpenPaper()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -106,19 +111,26 @@ public class Monitor : MonoBehaviour
         {
             if (hit.transform.CompareTag("Paper"))
             {
-                TextUI.text = "Á¾ÀÌ¸¦ º¸·Á¸é (Z)Å°¸¦ ´©¸£¼¼¿ä";
+                TextUI.text = "ì¢…ì´ë¥¼ ë³´ë ¤ë©´ (Z)í‚¤ë¥¼ ëˆ„ë¥´ì„¸ìš”";
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
+                    playerController.SetCanMove(false);  // ì´ë™ ê¸ˆì§€
                     paper.OpenPaper();
                     Text_UI.SetActive(false);
                     Crosshair.SetActive(false);
+                }
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    playerController.SetCanMove(true);  // ì´ë™ í—ˆìš©
+                    Text_UI.SetActive(true);
+                    Crosshair.SetActive(true);
                 }
 
             }
         }
     }
 
-    //»ç¹°ÇÔ ¿­±â
+    //ì‚¬ë¬¼í•¨ ì—´ê¸°
     private void TryOpenCase()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -129,7 +141,7 @@ public class Monitor : MonoBehaviour
         {
             if (hit.transform.CompareTag("Case"))
             {
-                TextUI.text = "¼­¶øÀ» ¿­·Á¸é (Z)Å°¸¦ ´©¸£¼¼¿ä";
+                TextUI.text = "ì„œëì„ ì—´ë ¤ë©´ (Z)í‚¤ë¥¼ ëˆ„ë¥´ì„¸ìš”";
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
                     Case.OpenCase();

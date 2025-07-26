@@ -1,15 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
-    //¿òÁ÷ÀÌ´Â ½Ã°£
+    //âœ…
+    //ì›€ì§ì´ëŠ” ì‹œê°„
     public float moveDuration = 1f;
-    //¿òÁ÷ÀÌ´Â ±âÁØ
+    //ì›€ì§ì´ëŠ” ê¸°ì¤€
     public Transform doorHinge;
 
-    //´İÈú °¢µµ= 0
+    //ë‹«í ê°ë„= 0
     private Quaternion closedRotation;
-    //¿­¸± °¢µµ= 60
+    //ì—´ë¦´ ê°ë„= 60
     private Quaternion openRotation;
 
     private void Start()

@@ -1,7 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Case : MonoBehaviour
 {
+    //✅
+    [SerializeField] PlayerController playerController;
     [SerializeField]
     private GameObject case1;
     [SerializeField]
@@ -35,12 +37,14 @@ public class Case : MonoBehaviour
         {
             if (hit.transform.gameObject.name == ("Room1_Case1"))
             {
+                playerController.SetCanMove(false);  // 이동 금지
                 case1.SetActive(true);
                 Showing1 = true;
             }
 
             else if (hit.transform.gameObject.name == ("Room1_Case2"))
             {
+                playerController.SetCanMove(false);  // 이동 금지
                 case2.SetActive(true);
                 Showing2 = true;
             }
@@ -54,6 +58,7 @@ public class Case : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
+                playerController.SetCanMove(true);  // 이동 허용
                 case1.SetActive(false);
                 Showing1 = false;
                 Text_UI.SetActive(true);
@@ -64,6 +69,7 @@ public class Case : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
+                playerController.SetCanMove(true);  // 이동 허용
                 case2.SetActive(false);
                 Showing2 = false;
                 Text_UI.SetActive(true);

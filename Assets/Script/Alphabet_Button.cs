@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Alphabet_Button : MonoBehaviour
 {
+    //✅
     [SerializeField]
     private TextMeshProUGUI alphabet;
 
