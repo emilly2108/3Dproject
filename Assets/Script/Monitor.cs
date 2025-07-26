@@ -18,7 +18,7 @@ public class Monitor : MonoBehaviour
 
     // bool°ª
     private bool Openscreen = false;
-    private bool IsTouch = false;
+    public bool IsTouch = false;
 
     public Door door;
     public Paper paper;

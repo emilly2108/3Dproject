@@ -1463,7 +1463,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 723743825}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &220795338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,7 +1769,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 329897610}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &227197765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3759,9 +3757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d32fb62f7431648aaa7a9a1fa0f851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: c411f74b90d48264d885c678db982fdb, type: 2}
+  item: {fileID: 11400000, guid: 3f47947760ca6304ea5c0ab5ecfad3d8, type: 2}
   monitor: {fileID: 1555731777}
-  inventory: {fileID: 0}
 --- !u!1 &464011121 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8605373349869880400, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
@@ -3953,7 +3950,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 1508269862}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &478468857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4122,7 +4118,6 @@ MonoBehaviour:
     part: []
     num: 
   theSlotToolTip: {fileID: 1681061244}
-  thePlayerStatus: {fileID: 1555731778}
 --- !u!1 &498172935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4837,7 +4832,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 1274634031}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &592092652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7389,7 +7383,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 1238164005}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &1042189097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8081,7 +8074,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 1831801068}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &1221446691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8358,7 +8350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_SlotsParent: {fileID: 270024471}
-  slots: []
 --- !u!1 &1274634029
 GameObject:
   m_ObjectHideFlags: 0
@@ -8444,8 +8435,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1297661347}
   - component: {fileID: 1297661350}
+  - component: {fileID: 1297661351}
   - component: {fileID: 1297661349}
-  - component: {fileID: 1297661348}
   m_Layer: 5
   m_Name: Inventory1
   m_TagString: Untagged
@@ -8473,22 +8464,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1297661348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297661346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9aa000076b1d24a870032d9db734bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  itemCount: 0
-  itemImage: {fileID: 1681888851}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &1297661349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8527,6 +8502,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297661346}
   m_CullTransparentMesh: 1
+--- !u!114 &1297661351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297661346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9aa000076b1d24a870032d9db734bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  itemCount: 0
+  itemImage: {fileID: 1681888851}
 --- !u!1 &1315255573
 GameObject:
   m_ObjectHideFlags: 0
@@ -8619,7 +8609,7 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: -0.0026080012, y: 0.2398125, z: 0.004431002}
---- !u!114 &1358626743
+--- !u!114 &1358626747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8633,7 +8623,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 4c6f8e537a69c24468cb798c2a800721, type: 2}
   monitor: {fileID: 1555731777}
-  inventory: {fileID: 0}
 --- !u!1 &1369333999 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8605164854953846084, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
@@ -9763,6 +9752,7 @@ MonoBehaviour:
   Crosshair: {fileID: 1404426179}
   Text_UI: {fileID: 234322671}
   TextUI: {fileID: 425330866}
+  IsTouch: 0
   door: {fileID: 1555731776}
   paper: {fileID: 1555731774}
   Case: {fileID: 1555731775}
@@ -9919,7 +9909,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   monitor: {fileID: 1555731777}
-  inventory: {fileID: 0}
 --- !u!1 &1576042312 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8604948548477100984, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
@@ -11208,7 +11197,6 @@ MonoBehaviour:
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 593110973}
-  theItemEffectDatabase: {fileID: 0}
 --- !u!114 &1767366480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13036,9 +13024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d32fb62f7431648aaa7a9a1fa0f851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 993d59ce34fa169448b319bdaa014c8f, type: 2}
+  item: {fileID: 11400000, guid: 71c636797be7ed34c9cb836f8b34941d, type: 2}
   monitor: {fileID: 1555731777}
-  inventory: {fileID: 0}
 --- !u!1001 &2098924877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13104,7 +13091,7 @@ PrefabInstance:
       addedObject: {fileID: 1358626742}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d0ab8dd36f22162418f329eaed161d4a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1358626743}
+      addedObject: {fileID: 1358626747}
   m_SourcePrefab: {fileID: 100100000, guid: d0ab8dd36f22162418f329eaed161d4a, type: 3}
 --- !u!4 &2111228587 stripped
 Transform:

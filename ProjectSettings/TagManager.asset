@@ -8,6 +8,8 @@ TagManager:
   - PC
   - Case
   - Paper
+  - Undefined
+  - Item
   layers:
   - Default
   - TransparentFX
