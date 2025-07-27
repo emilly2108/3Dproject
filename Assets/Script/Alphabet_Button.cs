@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Alphabet_Button : MonoBehaviour
 {
+    //✅
     [SerializeField]
     private TextMeshProUGUI alphabet;
 
@@ -31,7 +32,7 @@ public class Alphabet_Button : MonoBehaviour
 
     private void Alphabet()
     {
-        if(currentNumber==0)
+        if (currentNumber == 0)
         {
             currentAlphabet = "A";
             alphabet.text = currentAlphabet.ToString();

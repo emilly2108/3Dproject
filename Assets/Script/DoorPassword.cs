@@ -1,14 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 public class DoorPassword : MonoBehaviour
 {
+    //âœ…
+    [SerializeField] PlayerController playerController;
     public Door door;
     [SerializeField]
     private GameObject Crosshair;
     [SerializeField]
     private GameObject Text_UI;
-    // room1ÀÇ ¹æ ÀÚ¹°¼è ¼ıÀÚ
+    // room1ì˜ ë°© ìë¬¼ì‡  ìˆ«ì
     [SerializeField]
     private TextMeshProUGUI Room1text1;
     [SerializeField]
@@ -17,20 +19,20 @@ public class DoorPassword : MonoBehaviour
     private TextMeshProUGUI Room1text3;
     [SerializeField]
     private TextMeshProUGUI Room1text4;
-    //room1ÀÇ ÀÚ¹°¼èÀÇ Á¤´ä
+    //room1ì˜ ìë¬¼ì‡ ì˜ ì •ë‹µ
     private int answer1 = 3;
     private int answer2 = 1;
     private int answer3 = 2;
     private int answer4 = 0;
-    // ¹® ÄûÁî ¿ÀºêÁ§Æ® ÀÔ·Â
+    // ë¬¸ í€´ì¦ˆ ì˜¤ë¸Œì íŠ¸ ì…ë ¥
     [SerializeField]
     private GameObject Room1_DoorQ;
     void Start()
     {
-        
+
     }
 
-    
+
     void Update()
     {
         Door1PassWord();
@@ -43,6 +45,7 @@ public class DoorPassword : MonoBehaviour
         int num4 = int.Parse(Room1text4.text);
         if (num1 == answer1 && num2 == answer2 && num3 == answer3 && num4 == answer4)
         {
+            playerController.SetCanMove(true);  // ì´ë™ í—ˆìš©
             door.Solve1 = true;
             Room1_DoorQ.SetActive(false);
             door.Show1 = false;

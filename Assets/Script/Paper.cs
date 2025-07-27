@@ -1,8 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Paper : MonoBehaviour
 {
+    //✅
     [SerializeField]
     private GameObject Paper1;
     [SerializeField]
@@ -21,7 +22,7 @@ public class Paper : MonoBehaviour
     Monitor monitor;
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -47,7 +48,7 @@ public class Paper : MonoBehaviour
 
     private void ClosePaper()
     {
-        if(Showing1 == true)
+        if (Showing1 == true)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
