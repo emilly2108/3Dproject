@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //✅
 
     [SerializeField]
     private float walkSpeed;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    // 움직임 가능?
+    private bool isMoveable = true;
 
 
     private bool isWalk = false;
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (!isMoveable) return;
 
         IsGround();
         TryJump();
@@ -73,6 +77,16 @@ public class PlayerController : MonoBehaviour
         MoveCheck();
         CameraRotation();
         CharacterRotation();
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        isMoveable = canMove;
+    }
+
+    public bool GetCanMove()
+    {
+        return isMoveable;
     }
 
     // �ɱ� �õ�
@@ -276,5 +290,3 @@ public class PlayerController : MonoBehaviour
         return isGround;
     }
 }
-
-
