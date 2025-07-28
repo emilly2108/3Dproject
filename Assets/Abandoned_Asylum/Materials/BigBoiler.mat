@@ -10,13 +10,14 @@ Material:
   m_Name: BigBoiler
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 2907e11114ee16c45bfad5a6e7bf4947, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - _EMISSION
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   m_InvalidKeywords:
   - _METALLICGLOSSMAP
-  m_LightmapFlags: 4
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -43,8 +44,9 @@ Material:
     - _GlossyReflections: 1
     - _Parallax: 0.02
     m_Colors:
-    - _BaseColor: {r: 0.3433962, g: 0.1722275, b: 0.12116054, a: 1}
-    - _Color: {r: 0.34339616, g: 0.17222747, b: 0.121160515, a: 1}
+    - _BaseColor: {r: 0.17735851, g: 0.040450186, b: 0, a: 1}
+    - _Color: {r: 0.17735848, g: 0.040450163, b: 0, a: 1}
+    - _EmissionColor: {r: 0.016037747, g: 0.0050826436, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6658823980547890305

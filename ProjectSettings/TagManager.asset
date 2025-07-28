@@ -10,6 +10,7 @@ TagManager:
   - Paper
   - Undefined
   - Item
+  - Metal
   layers:
   - Default
   - TransparentFX
