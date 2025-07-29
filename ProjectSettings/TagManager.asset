@@ -11,6 +11,8 @@ TagManager:
   - Undefined
   - Item
   - Metal
+  - ChaseStart1
+  - ChaseEnd1
   layers:
   - Default
   - TransparentFX
