@@ -6,14 +6,15 @@ using UnityEngine;
 public class ItemEffect
 {
     public string itemName; // 아이템의 이름(키값)
-    [Tooltip("HP, SP, DP, HUNGRY, THIRSTY , SATISFY만 가능합니다")]
+    [Tooltip("HP, SP만 가능합니다")]
     public string[] part; // 부위
     public int[] num; // 수치
 }
 
 public class ItemEffectDatabase : MonoBehaviour
 {
-
+    [SerializeField]
+    PlayerController playerController;
     [SerializeField]
     private ItemEffect[] itemEffects;
 
@@ -22,7 +23,7 @@ public class ItemEffectDatabase : MonoBehaviour
     [SerializeField]
     private SlotToolTip theSlotToolTip;
 
-    private const string HP = "HP", SP = "SP", DP = "DP", HUNGRY = "HUNGRY", THIRSTY = "THIRSTY", SATISFY = "SATISFY";
+    private const string HP = "HP", SP = "SP";
 
     public void ShowToolTop(Item _item, Vector3 _pos)
     {
@@ -34,7 +35,7 @@ public class ItemEffectDatabase : MonoBehaviour
         theSlotToolTip.HideToolTip();
     }
 
-    public void UseItem(Item _item)
+    public void UseItem(Item _item, Slot _slot)
     {
         if (_item.itemType == Item.ItemType.Used)
         {
@@ -54,10 +55,13 @@ public class ItemEffectDatabase : MonoBehaviour
                                 //thePlayerStatus.IncreaseHP(itemEffects[x].num[y]);
                                 break;
                             case SP:
-                                //thePlayerStatus.IncreaseSP(itemEffects[x].num[y]);
+                                playerController.StartSpeedBoost(10f);
+
                                 break;
                         }
                         Debug.Log(_item.itemName + " 을 사용했습니다");
+                        //_slot.SetSlotCount(-1);
+                        _slot.ClearSlot();
 
                     }
                     return;

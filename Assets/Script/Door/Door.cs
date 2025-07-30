@@ -68,7 +68,7 @@ public class Door : MonoBehaviour
     // 문 퀴즈 해결 판단
     public bool Solve1 = false;
     public bool Solve3 = false;
-    private bool Solve4 = false;
+    public bool Solve4 = false;
     private bool Solve5 = false;
     private bool Solve6 = false;
     private bool Solve7 = false;
@@ -76,7 +76,7 @@ public class Door : MonoBehaviour
     // 문 퀴즈 나타났는지 판단
     public bool Show1 = false;
     public bool Show3 = false;
-    private bool Show4 = false;
+    public bool Show4 = false;
     private bool Show5 = false;
     private bool Show6 = false;
     private bool Show7 = false;
@@ -260,7 +260,48 @@ public class Door : MonoBehaviour
 
                 else if (hit.transform.gameObject.name == ("Room4_Door"))
                 {
-                    OpenDoor4();
+                    if (Opening4 == false)
+                    {
+                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                            playerController.SetCanMove(false);
+                            if (Solve4 == false)
+                            {
+                                Room4_DoorQ.SetActive(true);
+                                Show4 = true;
+                                Text_UI.SetActive(false);
+                                Crosshair.SetActive(false);
+                            }
+
+                            else if (Solve4 == true)
+                            {
+                                playerController.SetCanMove(true);
+                                Room4_OpenDoor.StartCoroutine(Room4_OpenDoor.DoorMoveOpen());
+                                Opening4 = true;
+                            }
+                        }
+                    }
+                    else if (Show4 == true)
+                    {
+                        if (Input.GetKeyDown(KeyCode.R))
+                        {
+                            playerController.SetCanMove(true);
+                            Room4_DoorQ.SetActive(false);
+                            Show4 = false;
+                            Text_UI.SetActive(true);
+                            Crosshair.SetActive(true);
+                        }
+                    }
+                    else if (Opening4 == true)
+                    {
+                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                            Room4_OpenDoor.StartCoroutine(Room4_OpenDoor.DoorMoveClose());
+                            Opening4 = false;
+                        }
+                    }
                 }
 
                 else if (hit.transform.gameObject.name == ("Room5_Door"))
