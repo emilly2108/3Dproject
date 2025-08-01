@@ -1,28 +1,33 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class Monitor : MonoBehaviour
 {
-    //« ø‰«— ƒƒ∆˜≥Õ∆Æ
-    [SerializeField]
-    private GameObject Room1_Monitor;
+    //ÌïÑÏöîÌïú Ïª¥Ìè¨ÎÑåÌä∏
+    
     [SerializeField]
     private GameObject Room1MQ;
     [SerializeField]
-    private GameObject Crosshair;
+    private GameObject Room3MQ;
     [SerializeField]
-    private GameObject Text_UI;
+    public GameObject Crosshair;
+    [SerializeField]
+    public GameObject Text_UI;
     [SerializeField]
     public TextMeshProUGUI TextUI;
 
-    // bool∞™
-    private bool Openscreen = false;
-    private bool IsTouch = false;
+    // boolÍ∞í
+    public bool Openscreen1 = false;
+    public bool Openscreen2 = false;
+    public bool IsTouch = false;
 
     public Door door;
     public Paper paper;
     public Case Case;
+    public Metal metal;
+    [SerializeField]
+    PlayerController playerController;
     void Start()
     {
 
@@ -32,60 +37,82 @@ public class Monitor : MonoBehaviour
     {
         TryOpenScreen();
         CloseText();
-        TryCloseScreen();
-        OpenPaper();
-        TryOpenCase();
+        TryOpenMetal();
     }
 
 
-    //∏¥œ≈Õ ∫∏±‚
+    //Î™®ÎãàÌÑ∞ Î≥¥Í∏∞
     private void TryOpenScreen()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
-            if (IsTouch)
+        IsTouch = Physics.Raycast(ray, out hit, 1.5f);
+        if (IsTouch)
+        {
+            if (hit.transform.CompareTag("PC"))
             {
-                if(hit.transform.CompareTag("PC"))
+                TextUI.text = " ÌôîÎ©¥ÏùÑ Î≥¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
+                if (hit.transform.gameObject.name == ("PC_Monitor"))
                 {
-                    TextUI.text = " »≠∏È¿ª ∫∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
                     if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        playerController.SetCanMove(false);
+                        Text_UI.SetActive(false);
+                        Crosshair.SetActive(false);
+                        Room1MQ.SetActive(true);
+                        Openscreen1 = true;
+                    }
+                    else if (Openscreen1 == true)
+                    {
+                        if (Input.GetKeyDown(KeyCode.R))
                         {
-                            Text_UI.SetActive(false);
-                            Crosshair.SetActive(false);
-                            Room1MQ.SetActive(true);
-                            Openscreen = true;
+                            playerController.SetCanMove(true);
+                            Text_UI.SetActive(true);
+                            Crosshair.SetActive(true);
+                            Room1MQ.SetActive(false);
+                            Openscreen1 = false;
                         }
-                    
+                    }
+
+                }
+
+                else if (hit.transform.gameObject.name == ("TV_Retro"))
+                {
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        playerController.SetCanMove(false);
+                        Text_UI.SetActive(false);
+                        Crosshair.SetActive(false);
+                        Room3MQ.SetActive(true);
+                        Openscreen2 = true;
+                    }
+                    else if (Openscreen2 == true)
+                    {
+                        if (Input.GetKeyDown(KeyCode.R))
+                        {
+                            playerController.SetCanMove(true);
+                            Text_UI.SetActive(true);
+                            Crosshair.SetActive(true);
+                            Room3MQ.SetActive(false);
+                            Openscreen2 = false;
+                        }
+                    }
+
                 }
             }
-    }
-
-    //∏¥œ≈Õ ¥›±‚
-    private void TryCloseScreen()
-    {
-        if(Openscreen == true)
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                Text_UI.SetActive(true);
-                Crosshair.SetActive(true);
-                Room1MQ.SetActive(false);
-                Openscreen = false;
-            }
         }
-
     }
 
-    //ªÛ»£¿€øÎ≈∞ ¡ˆøÏ±‚
+   
+    //ÏÉÅÌò∏ÏûëÏö©ÌÇ§ ÏßÄÏö∞Í∏∞
     public void CloseText()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
+        IsTouch = Physics.Raycast(ray, out hit, 1.5f);
         if (IsTouch)
         {
-            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case"))
+            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Item") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Metal"))
             {
                 TextUI.text = " ";
             }
@@ -96,46 +123,18 @@ public class Monitor : MonoBehaviour
         }
     }
 
-    //¡æ¿Ã∫∏¥¬ ªÛ»£¿€øÎ≈∞ ∂ÁøÏ±‚
-    private void OpenPaper()
+
+    private void TryOpenMetal()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Debug.DrawRay(ray.origin, ray.direction * 1.5f, Color.yellow);
         RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
+        IsTouch = Physics.Raycast(ray, out hit, 1.5f);
         if (IsTouch)
         {
-            if (hit.transform.CompareTag("Paper"))
+            if (hit.transform.CompareTag("Metal"))
             {
-                TextUI.text = "¡æ¿Ã∏¶ ∫∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    paper.OpenPaper();
-                    Text_UI.SetActive(false);
-                    Crosshair.SetActive(false);
-                }
-
-            }
-        }
-    }
-
-    //ªÁπ∞«‘ ø≠±‚
-    private void TryOpenCase()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        Debug.DrawRay(ray.origin, ray.direction * 5f, Color.yellow);
-        RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
-        if (IsTouch)
-        {
-            if (hit.transform.CompareTag("Case"))
-            {
-                TextUI.text = "º≠∂¯¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    Case.OpenCase();
-                    Text_UI.SetActive(false);
-                    Crosshair.SetActive(false);
-                }
+                metal.OpenMetal();
 
             }
         }

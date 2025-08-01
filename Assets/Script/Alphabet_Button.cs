@@ -23,7 +23,7 @@ public class Alphabet_Button : MonoBehaviour
     public void OnButtonPressed()
     {
         currentNumber++;
-        if (currentNumber >= 10)
+        if (currentNumber >= 11)
         {
             currentNumber = 0;
         }
@@ -31,7 +31,7 @@ public class Alphabet_Button : MonoBehaviour
 
     private void Alphabet()
     {
-        if(currentNumber==0)
+        if (currentNumber == 0)
         {
             currentAlphabet = "A";
             alphabet.text = currentAlphabet.ToString();
@@ -43,7 +43,7 @@ public class Alphabet_Button : MonoBehaviour
         }
         else if (currentNumber == 2)
         {
-            currentAlphabet = "E";
+            currentAlphabet = "G";
             alphabet.text = currentAlphabet.ToString();
         }
         else if (currentNumber == 3)
@@ -58,27 +58,32 @@ public class Alphabet_Button : MonoBehaviour
         }
         else if (currentNumber == 5)
         {
-            currentAlphabet = "N";
+            currentAlphabet = "E";
             alphabet.text = currentAlphabet.ToString();
         }
         else if (currentNumber == 6)
         {
-            currentAlphabet = "P";
+            currentAlphabet = "R";
             alphabet.text = currentAlphabet.ToString();
         }
         else if (currentNumber == 7)
         {
-            currentAlphabet = "R";
+            currentAlphabet = "S";
             alphabet.text = currentAlphabet.ToString();
         }
         else if (currentNumber == 8)
         {
-            currentAlphabet = "S";
+            currentAlphabet = "T";
             alphabet.text = currentAlphabet.ToString();
         }
         else if (currentNumber == 9)
         {
-            currentAlphabet = "T";
+            currentAlphabet = "Y";
+            alphabet.text = currentAlphabet.ToString();
+        }
+        else if (currentNumber == 10)
+        {
+            currentAlphabet = "M";
             alphabet.text = currentAlphabet.ToString();
         }
     }

@@ -1,10 +1,12 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Door : MonoBehaviour
 {
-    // πÆ ø¿∫Í¡ß∆Æ ¿‘∑¬
+    //‚úÖ
+    [SerializeField] PlayerController playerController;
+    // Î¨∏ Ïò§Î∏åÏ†ùÌä∏ ÏûÖÎ†•
     [SerializeField]
     private GameObject Room1_Door;
     [SerializeField]
@@ -33,7 +35,7 @@ public class Door : MonoBehaviour
     [SerializeField]
     private GameObject Bath6_Door;
 
-    // πÆ ƒ˚¡Ó ø¿∫Í¡ß∆Æ ¿‘∑¬
+    // Î¨∏ ÌÄ¥Ï¶à Ïò§Î∏åÏ†ùÌä∏ ÏûÖÎ†•
     [SerializeField]
     private GameObject Room1_DoorQ;
     [SerializeField]
@@ -47,7 +49,7 @@ public class Door : MonoBehaviour
     [SerializeField]
     private GameObject Room7_DoorQ;
 
-    // πÆ ø≠∏≤ ∆«¥‹
+    // Î¨∏ Ïó¥Î¶º ÌåêÎã®
     private bool Opening1 = false;
     private bool Opening2 = false;
     private bool Opening3 = false;
@@ -63,17 +65,17 @@ public class Door : MonoBehaviour
     private bool BOpening5 = false;
     private bool BOpening6 = false;
 
-    // πÆ ƒ˚¡Ó «ÿ∞· ∆«¥‹
+    // Î¨∏ ÌÄ¥Ï¶à Ìï¥Í≤∞ ÌåêÎã®
     public bool Solve1 = false;
-    private bool Solve3 = false;
+    public bool Solve3 = false;
     private bool Solve4 = false;
     private bool Solve5 = false;
     private bool Solve6 = false;
     private bool Solve7 = false;
 
-    // πÆ ƒ˚¡Ó ≥™≈∏≥µ¥¬¡ˆ ∆«¥‹
+    // Î¨∏ ÌÄ¥Ï¶à ÎÇòÌÉÄÎÇ¨ÎäîÏßÄ ÌåêÎã®
     public bool Show1 = false;
-    private bool Show3 = false;
+    public bool Show3 = false;
     private bool Show4 = false;
     private bool Show5 = false;
     private bool Show6 = false;
@@ -83,7 +85,7 @@ public class Door : MonoBehaviour
     private OpenDoor Room1_OpenDoor;
     [SerializeField]
     private OpenDoor Room2_OpenDoor;
-    /*[SerializeField]
+    [SerializeField]
     private OpenDoor Room3_OpenDoor;
     [SerializeField]
     private OpenDoor Room4_OpenDoor;
@@ -92,7 +94,7 @@ public class Door : MonoBehaviour
     [SerializeField]
     private OpenDoor Room6_OpenDoor;
     [SerializeField]
-    private OpenDoor Room7_OpenDoor;*/
+    private OpenDoor Room7_OpenDoor;
 
 
     [SerializeField]
@@ -115,27 +117,27 @@ public class Door : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI TextUI;
 
-    //πÆ ¡¢√À ∆«¥‹
+    //Î¨∏ Ï†ëÏ¥â ÌåêÎã®
     private bool IsTouch = false;
     [SerializeField]
     OpenDoor opendoor;
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         TryOpen();
-        
+
     }
 
     public void TryOpen()
     {
-    Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
-        IsTouch = Physics.Raycast(ray, out hit, 0.7f);
+        IsTouch = Physics.Raycast(ray, out hit, 1.5f);
         if (IsTouch)
             if (hit.transform.CompareTag("Door"))
             {
@@ -143,9 +145,10 @@ public class Door : MonoBehaviour
                 {
                     if (Opening1 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
+                            playerController.SetCanMove(false);
                             if (Solve1 == false)
                             {
                                 Room1_DoorQ.SetActive(true);
@@ -156,6 +159,7 @@ public class Door : MonoBehaviour
 
                             else if (Solve1 == true)
                             {
+                                playerController.SetCanMove(true);
                                 Room1_OpenDoor.StartCoroutine(Room1_OpenDoor.DoorMoveOpen());
                                 Opening1 = true;
                             }
@@ -165,6 +169,7 @@ public class Door : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.R))
                         {
+                            playerController.SetCanMove(true);
                             Room1_DoorQ.SetActive(false);
                             Show1 = false;
                             Text_UI.SetActive(true);
@@ -173,43 +178,85 @@ public class Door : MonoBehaviour
                     }
                     else if (Opening1 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
-                        if(Input.GetKeyDown(KeyCode.Z))
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
+                        if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Room1_OpenDoor.StartCoroutine(Room1_OpenDoor.DoorMoveClose());
                             Opening1 = false;
                         }
                     }
                 }
-                
+
                 else if (hit.transform.gameObject.name == ("Room2_Door"))
                 {
                     if (Opening2 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Room2_OpenDoor.StartCoroutine(Room2_OpenDoor.DoorMoveOpen());
                             Opening2 = true;
                         }
                     }
-                    
+
                     else if (Opening2 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Room2_OpenDoor.StartCoroutine(Room2_OpenDoor.DoorMoveClose());
                             Opening2 = false;
                         }
                     }
-                
+
                 }
 
                 else if (hit.transform.gameObject.name == ("Room3_Door"))
                 {
-                    OpenDoor3();
+                    if (Opening3 == false)
+                    {
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                            playerController.SetCanMove(false);
+                            if (Solve3 == false)
+                            {
+                                Room3_DoorQ.SetActive(true);
+                                Show3 = true;
+                                Text_UI.SetActive(false);
+                                Crosshair.SetActive(false);
+                            }
+
+                            else if (Solve3 == true)
+                            {
+                                playerController.SetCanMove(true);
+                                Room3_OpenDoor.StartCoroutine(Room3_OpenDoor.DoorMoveOpen());
+                                Opening3 = true;
+                            }
+                        }
+                    }
+                    else if (Show3 == true)
+                    {
+                        if (Input.GetKeyDown(KeyCode.R))
+                        {
+                            playerController.SetCanMove(true);
+                            Room3_DoorQ.SetActive(false);
+                            Show3 = false;
+                            Text_UI.SetActive(true);
+                            Crosshair.SetActive(true);
+                        }
+                    }
+                    else if (Opening3 == true)
+                    {
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                            Room3_OpenDoor.StartCoroutine(Room3_OpenDoor.DoorMoveClose());
+                            Opening3 = false;
+                        }
+                    }
                 }
+
 
                 else if (hit.transform.gameObject.name == ("Room4_Door"))
                 {
@@ -235,7 +282,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening1 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath1_OpenDoor.StartCoroutine(Bath1_OpenDoor.DoorMoveOpen());
@@ -245,7 +292,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening1 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath1_OpenDoor.StartCoroutine(Bath1_OpenDoor.DoorMoveClose());
@@ -258,7 +305,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening2 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath2_OpenDoor.StartCoroutine(Bath2_OpenDoor.DoorMoveOpen());
@@ -268,7 +315,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening2 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath2_OpenDoor.StartCoroutine(Bath2_OpenDoor.DoorMoveClose());
@@ -281,7 +328,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening3 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath3_OpenDoor.StartCoroutine(Bath3_OpenDoor.DoorMoveOpen());
@@ -291,7 +338,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening3 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath3_OpenDoor.StartCoroutine(Bath3_OpenDoor.DoorMoveClose());
@@ -303,7 +350,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening4 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath4_OpenDoor.StartCoroutine(Bath4_OpenDoor.DoorMoveOpen());
@@ -313,7 +360,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening4 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath4_OpenDoor.StartCoroutine(Bath4_OpenDoor.DoorMoveClose());
@@ -325,7 +372,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening5 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath5_OpenDoor.StartCoroutine(Bath5_OpenDoor.DoorMoveOpen());
@@ -335,7 +382,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening5 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath5_OpenDoor.StartCoroutine(Bath5_OpenDoor.DoorMoveClose());
@@ -348,7 +395,7 @@ public class Door : MonoBehaviour
                 {
                     if (BOpening6 == false)
                     {
-                        TextUI.text = "πÆ¿ª ø≠∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Ïó¥Î†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath6_OpenDoor.StartCoroutine(Bath6_OpenDoor.DoorMoveOpen());
@@ -358,7 +405,7 @@ public class Door : MonoBehaviour
 
                     else if (BOpening6 == true)
                     {
-                        TextUI.text = "πÆ¿ª ¥›¿∏∑¡∏È (Z)≈∞∏¶ ¥©∏£ººø‰";
+                        TextUI.text = "Î¨∏ÏùÑ Îã´ÏúºÎ†§Î©¥ (Z)ÌÇ§Î•º ÎàÑÎ•¥ÏÑ∏Ïöî";
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             Bath6_OpenDoor.StartCoroutine(Bath6_OpenDoor.DoorMoveClose());
@@ -367,7 +414,7 @@ public class Door : MonoBehaviour
                     }
                 }
             }
-    }  
+    }
 
     public void OpenDoor2()
     {
@@ -445,6 +492,5 @@ public class Door : MonoBehaviour
 
     }
 
-    
-}
 
+}
