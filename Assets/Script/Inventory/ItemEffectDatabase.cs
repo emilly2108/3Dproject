@@ -15,6 +15,7 @@ public class ItemEffectDatabase : MonoBehaviour
 {
     [SerializeField]
     PlayerController playerController;
+    [SerializeField] LifeSystem lifeSystem;
     [SerializeField]
     private ItemEffect[] itemEffects;
 
@@ -52,6 +53,7 @@ public class ItemEffectDatabase : MonoBehaviour
                         switch (itemEffects[x].part[y])
                         {
                             case HP:
+                                lifeSystem. ChangeHP(1);
                                 //thePlayerStatus.IncreaseHP(itemEffects[x].num[y]);
                                 break;
                             case SP:

@@ -6930,14 +6930,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1555731778}
+  lifeSystem: {fileID: 1555731785}
   itemEffects:
   - itemName: "\uC18D\uB3C4 \uC99D\uAC00 \uBB3C\uC57D"
     part:
     - SPEED
     num: 0a000000
-  - itemName: 
-    part: []
-    num: 
+  - itemName: "\uCCB4\uB825 \uC99D\uAC00 \uBB3C\uC57D"
+    part:
+    - HP
+    num: 01000000
   theSlotToolTip: {fileID: 1681061244}
 --- !u!1 &498172935
 GameObject:
@@ -19752,7 +19754,7 @@ Transform:
   m_GameObject: {fileID: 1555731772}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.27, y: 0.90068996, z: -10.31}
+  m_LocalPosition: {x: -4.8, y: 0.90068996, z: -11.5}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19804,7 +19806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d32fb62f7431648aaa7a9a1fa0f851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 4c6f8e537a69c24468cb798c2a800721, type: 2}
   monitor: {fileID: 1555731777}
 --- !u!1 &1576042312 stripped
 GameObject:
