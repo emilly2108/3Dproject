@@ -13,6 +13,7 @@ TagManager:
   - Metal
   - ChaseStart1
   - ChaseEnd1
+  - Hole
   layers:
   - Default
   - TransparentFX
