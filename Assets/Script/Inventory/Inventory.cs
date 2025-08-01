@@ -49,27 +49,35 @@ public class Inventory : MonoBehaviour
         go_SlotsParent.SetActive(false);
     }
 
-    public void AcquireItem(Item _item, int _count = 1)
+    public void AcquireItem(Item _item)
     {
+        List<int> ItemIndexes = new List<int>();
+
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item != null)
+            if (slots[i].item != null && slots[i].item.itemName == _item.itemName)
             {
-                if (slots[i].item.itemName == _item.itemName)
-                {
-                    slots[i].SetSlotCount(_count);
-                    return;
-                }
+                ItemIndexes.Add(i);
             }
+        }
+
+        if (ItemIndexes.Count >= 1)
+        {
+            for (int i = 1; i < ItemIndexes.Count; i++)
+            {
+                slots[ItemIndexes[i]].ClearSlot();
+            }
+            return;
         }
 
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].item == null)
             {
-                slots[i].AddItem(_item, _count);
+                slots[i].AddItem(_item);
                 return;
             }
         }
     }
+
 }

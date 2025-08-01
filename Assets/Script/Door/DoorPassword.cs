@@ -20,7 +20,7 @@ public class DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Room1text4;
 
-    // room3의 방 자물쇠 숫자
+    // room3의 방 자물쇠 문자
     [SerializeField]
     private TextMeshProUGUI Room3text1;
     [SerializeField]
@@ -30,6 +30,13 @@ public class DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Room3text4;
 
+    // room4의 방 자물쇠 문자
+    [SerializeField]
+    private TextMeshProUGUI Room4text1;
+    [SerializeField]
+    private TextMeshProUGUI Room4text2;
+    [SerializeField]
+    private TextMeshProUGUI Room4text3;
 
     //room1의 자물쇠의 정답
     private int R1answer1 = 3;
@@ -44,11 +51,18 @@ public class DoorPassword : MonoBehaviour
     private string R3answer3 = "R";
     private string R3answer4 = "K";
 
+    //room4의 자물쇠의 정답
+    private string R4answer1 = "G";
+    private string R4answer2 = "Y";
+    private string R4answer3 = "M";
+
     // 문 퀴즈 오브젝트 입력
     [SerializeField]
     private GameObject Room1_DoorQ;
     [SerializeField]
     private GameObject Room3_DoorQ;
+    [SerializeField]
+    private GameObject Room4_DoorQ;
 
     void Start()
     {
@@ -59,7 +73,7 @@ public class DoorPassword : MonoBehaviour
     void Update()
     {
         Door1PassWord();
-        Door2PassWord();
+        Door3PassWord();
     }
     private void Door1PassWord()
     {
@@ -83,7 +97,7 @@ public class DoorPassword : MonoBehaviour
         }
     }
 
-    private void Door2PassWord()
+    private void Door3PassWord()
     {
         string R3str1 = (Room3text1.text);
         string R3str2 = (Room3text2.text);
@@ -104,4 +118,23 @@ public class DoorPassword : MonoBehaviour
         }
     }
 
+    private void Door4PassWord()
+    {
+        string R4str1 = (Room4text1.text);
+        string R4str2 = (Room4text2.text);
+        string R4str3 = (Room4text3.text);
+        if (R4answer1 == Room4text1.text && R4answer2 == Room4text2.text && R4answer3 == Room4text3.text)
+        {
+            playerController.SetCanMove(true);
+            door.Solve4 = true;
+            Room4_DoorQ.SetActive(false);
+            door.Show4 = false;
+            Text_UI.SetActive(true);
+            Crosshair.SetActive(true);
+        }
+        else
+        {
+            door.Solve4 = false;
+        }
+    }
 }

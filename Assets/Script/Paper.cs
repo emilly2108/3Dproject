@@ -21,6 +21,8 @@ public class Paper : MonoBehaviour
     private GameObject R3_Paper5;
     [SerializeField]
     private GameObject R3_Paper6;
+    [SerializeField]
+    private GameObject R3_Paper7;
 
     [SerializeField]
     private GameObject Crosshair;
@@ -35,6 +37,7 @@ public class Paper : MonoBehaviour
     private bool R3_Showing4 = false;
     private bool R3_Showing5 = false;
     private bool R3_Showing6 = false;
+    private bool R3_Showing7 = false;
 
     void Start()
     {
@@ -217,6 +220,28 @@ public class Paper : MonoBehaviour
                             playerController.SetCanMove(true);
                             R3_Paper6.SetActive(false);
                             R3_Showing6 = false;
+                            Text_UI.SetActive(true);
+                            Crosshair.SetActive(true);
+                        }
+                    }
+                }
+                else if (hit.transform.gameObject.name == ("Room3_Paper7"))
+                {
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        playerController.SetCanMove(false);
+                        R3_Paper7.SetActive(true);
+                        R3_Showing7 = true;
+                        Text_UI.SetActive(false);
+                        Crosshair.SetActive(false);
+                    }
+                    else if (R3_Showing7 == true)
+                    {
+                        if (Input.GetKeyDown(KeyCode.R))
+                        {
+                            playerController.SetCanMove(true);
+                            R3_Paper7.SetActive(false);
+                            R3_Showing7 = false;
                             Text_UI.SetActive(true);
                             Crosshair.SetActive(true);
                         }
