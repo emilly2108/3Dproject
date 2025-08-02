@@ -38,6 +38,16 @@ public class DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Room4text3;
 
+    // room5의 방 자물쇠 문자
+    [SerializeField]
+    private TextMeshProUGUI Room5text1;
+    [SerializeField]
+    private TextMeshProUGUI Room5text2;
+    [SerializeField]
+    private TextMeshProUGUI Room5text3;
+    [SerializeField]
+    private TextMeshProUGUI Room5text4;
+
     //room1의 자물쇠의 정답
     private int R1answer1 = 3;
     private int R1answer2 = 1;
@@ -56,6 +66,12 @@ public class DoorPassword : MonoBehaviour
     private string R4answer2 = "Y";
     private string R4answer3 = "M";
 
+    //room5의 자물쇠의 정답
+    private string R5answer1 = "D";
+    private string R5answer2 = "A";
+    private string R5answer3 = "L";
+    private string R5answer4 = "E";
+
     // 문 퀴즈 오브젝트 입력
     [SerializeField]
     private GameObject Room1_DoorQ;
@@ -63,6 +79,8 @@ public class DoorPassword : MonoBehaviour
     private GameObject Room3_DoorQ;
     [SerializeField]
     private GameObject Room4_DoorQ;
+    [SerializeField]
+    private GameObject Room5_DoorQ;
 
     void Start()
     {
@@ -74,6 +92,8 @@ public class DoorPassword : MonoBehaviour
     {
         Door1PassWord();
         Door3PassWord();
+        Door4PassWord();
+        Door5PassWord();
     }
     private void Door1PassWord()
     {
@@ -135,6 +155,26 @@ public class DoorPassword : MonoBehaviour
         else
         {
             door.Solve4 = false;
+        }
+    }
+    private void Door5PassWord()
+    {
+        string R5str1 = (Room5text1.text);
+        string R5str2 = (Room5text2.text);
+        string R5str3 = (Room5text3.text);
+        string R5str4 = (Room5text4.text);
+        if (R5answer1 == Room5text1.text && R5answer2 == Room5text2.text && R5answer3 == Room5text3.text && R5answer4 == Room5text4.text)
+        {
+            playerController.SetCanMove(true);
+            door.Solve5 = true;
+            Room5_DoorQ.SetActive(false);
+            door.Show5 = false;
+            Text_UI.SetActive(true);
+            Crosshair.SetActive(true);
+        }
+        else
+        {
+            door.Solve5 = false;
         }
     }
 }

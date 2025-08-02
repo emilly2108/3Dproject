@@ -4,8 +4,9 @@ using TMPro;
 
 public class Door : MonoBehaviour
 {
-    //✅
-    [SerializeField] PlayerController playerController;
+    [SerializeField]
+    PlayerController playerController;
+
     // 문 오브젝트 입력
     [SerializeField]
     private GameObject Room1_Door;
@@ -69,17 +70,17 @@ public class Door : MonoBehaviour
     public bool Solve1 = false;
     public bool Solve3 = false;
     public bool Solve4 = false;
-    private bool Solve5 = false;
-    private bool Solve6 = false;
-    private bool Solve7 = false;
+    public bool Solve5 = false;
+    public bool Solve6 = false;
+    public bool Solve7 = false;
 
     // 문 퀴즈 나타났는지 판단
     public bool Show1 = false;
     public bool Show3 = false;
     public bool Show4 = false;
-    private bool Show5 = false;
-    private bool Show6 = false;
-    private bool Show7 = false;
+    public bool Show5 = false;
+    public bool Show6 = false;
+    public bool Show7 = false;
 
     [SerializeField]
     private OpenDoor Room1_OpenDoor;
@@ -129,8 +130,8 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        TryOpen();
 
+        TryOpen();
     }
 
     public void TryOpen()
@@ -138,400 +139,119 @@ public class Door : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
         IsTouch = Physics.Raycast(ray, out hit, 1.5f);
-        if (IsTouch)
-            if (hit.transform.CompareTag("Door"))
+        if (!IsTouch || !hit.transform.CompareTag("Door")) return;
+
+        string doorName = hit.transform.gameObject.name.Trim();
+
+        switch (doorName)
+        {
+            case "Room1_Door":
+                PuzzleDoor(ref Opening1, ref Show1, Solve1, Room1_DoorQ, Room1_OpenDoor);
+                break;
+            case "Room2_Door":
+                door(ref Opening2, Room2_OpenDoor);
+                break;
+            case "Room3_Door":
+                PuzzleDoor(ref Opening3, ref Show3, Solve3, Room3_DoorQ, Room3_OpenDoor);
+                break;
+            case "Room4_Door":
+                PuzzleDoor(ref Opening4, ref Show4, Solve4, Room4_DoorQ, Room4_OpenDoor);
+                break;
+            case "Room5_Door":
+                PuzzleDoor(ref Opening5, ref Show5, Solve5, Room5_DoorQ, Room5_OpenDoor);
+                break;
+            case "Room6_Door":
+                PuzzleDoor(ref Opening6, ref Show6, Solve6, Room6_DoorQ, Room6_OpenDoor);
+                break;
+            case "Room7_Door":
+                PuzzleDoor(ref Opening7, ref Show7, Solve7, Room7_DoorQ, Room7_OpenDoor);
+                break;
+            case "ToiletDoor1":
+                door(ref BOpening1, Bath1_OpenDoor);
+                break;
+            case "ToiletDoor2":
+                door(ref BOpening2, Bath2_OpenDoor);
+                break;
+            case "ToiletDoor3":
+                door(ref BOpening3, Bath3_OpenDoor);
+                break;
+            case "ToiletDoor4":
+                door(ref BOpening4, Bath4_OpenDoor);
+                break;
+            case "ToiletDoor5":
+                door(ref BOpening5, Bath5_OpenDoor);
+                break;
+            case "ToiletDoor6":
+                door(ref BOpening6, Bath6_OpenDoor);
+                break;
+        }
+    }
+
+    private void PuzzleDoor(ref bool isOpen, ref bool isShow, bool isSolved, GameObject quizUI, OpenDoor door)
+    {
+        if (!isOpen)
+        {
+            TextUI.text = "문을 열려면 (Z)키를 누르세요";
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                if (hit.transform.gameObject.name == ("Room1_Door"))
+                playerController.SetCanMove(false);
+                if (!isSolved)
                 {
-                    if (Opening1 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            playerController.SetCanMove(false);
-                            if (Solve1 == false)
-                            {
-                                Room1_DoorQ.SetActive(true);
-                                Show1 = true;
-                                Text_UI.SetActive(false);
-                                Crosshair.SetActive(false);
-                            }
-
-                            else if (Solve1 == true)
-                            {
-                                playerController.SetCanMove(true);
-                                Room1_OpenDoor.StartCoroutine(Room1_OpenDoor.DoorMoveOpen());
-                                Opening1 = true;
-                            }
-                        }
-                    }
-                    else if (Show1 == true)
-                    {
-                        if (Input.GetKeyDown(KeyCode.R))
-                        {
-                            playerController.SetCanMove(true);
-                            Room1_DoorQ.SetActive(false);
-                            Show1 = false;
-                            Text_UI.SetActive(true);
-                            Crosshair.SetActive(true);
-                        }
-                    }
-                    else if (Opening1 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Room1_OpenDoor.StartCoroutine(Room1_OpenDoor.DoorMoveClose());
-                            Opening1 = false;
-                        }
-                    }
+                    quizUI.SetActive(true);
+                    isShow = true;
+                    Text_UI.SetActive(false);
+                    Crosshair.SetActive(false);
                 }
-
-                else if (hit.transform.gameObject.name == ("Room2_Door"))
+                else
                 {
-                    if (Opening2 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Room2_OpenDoor.StartCoroutine(Room2_OpenDoor.DoorMoveOpen());
-                            Opening2 = true;
-                        }
-                    }
-
-                    else if (Opening2 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Room2_OpenDoor.StartCoroutine(Room2_OpenDoor.DoorMoveClose());
-                            Opening2 = false;
-                        }
-                    }
-
-                }
-
-                else if (hit.transform.gameObject.name == ("Room3_Door"))
-                {
-                    if (Opening3 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            playerController.SetCanMove(false);
-                            if (Solve3 == false)
-                            {
-                                Room3_DoorQ.SetActive(true);
-                                Show3 = true;
-                                Text_UI.SetActive(false);
-                                Crosshair.SetActive(false);
-                            }
-
-                            else if (Solve3 == true)
-                            {
-                                playerController.SetCanMove(true);
-                                Room3_OpenDoor.StartCoroutine(Room3_OpenDoor.DoorMoveOpen());
-                                Opening3 = true;
-                            }
-                        }
-                    }
-                    else if (Show3 == true)
-                    {
-                        if (Input.GetKeyDown(KeyCode.R))
-                        {
-                            playerController.SetCanMove(true);
-                            Room3_DoorQ.SetActive(false);
-                            Show3 = false;
-                            Text_UI.SetActive(true);
-                            Crosshair.SetActive(true);
-                        }
-                    }
-                    else if (Opening3 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Room3_OpenDoor.StartCoroutine(Room3_OpenDoor.DoorMoveClose());
-                            Opening3 = false;
-                        }
-                    }
-                }
-
-
-                else if (hit.transform.gameObject.name == ("Room4_Door"))
-                {
-                    if (Opening4 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            playerController.SetCanMove(false);
-                            if (Solve4 == false)
-                            {
-                                Room4_DoorQ.SetActive(true);
-                                Show4 = true;
-                                Text_UI.SetActive(false);
-                                Crosshair.SetActive(false);
-                            }
-
-                            else if (Solve4 == true)
-                            {
-                                playerController.SetCanMove(true);
-                                Room4_OpenDoor.StartCoroutine(Room4_OpenDoor.DoorMoveOpen());
-                                Opening4 = true;
-                            }
-                        }
-                    }
-                    else if (Show4 == true)
-                    {
-                        if (Input.GetKeyDown(KeyCode.R))
-                        {
-                            playerController.SetCanMove(true);
-                            Room4_DoorQ.SetActive(false);
-                            Show4 = false;
-                            Text_UI.SetActive(true);
-                            Crosshair.SetActive(true);
-                        }
-                    }
-                    else if (Opening4 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Room4_OpenDoor.StartCoroutine(Room4_OpenDoor.DoorMoveClose());
-                            Opening4 = false;
-                        }
-                    }
-                }
-
-                else if (hit.transform.gameObject.name == ("Room5_Door"))
-                {
-                    OpenDoor5();
-                }
-
-                else if (hit.transform.gameObject.name == ("Room6_Door"))
-                {
-                    OpenDoor6();
-                }
-
-                else if (hit.transform.gameObject.name == ("Room7_Door"))
-                {
-                    OpenDoor7();
-                }
-
-                else if (hit.transform.gameObject.name == ("ToiletDoor1"))
-                {
-                    if (BOpening1 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath1_OpenDoor.StartCoroutine(Bath1_OpenDoor.DoorMoveOpen());
-                            BOpening1 = true;
-                        }
-                    }
-
-                    else if (BOpening1 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath1_OpenDoor.StartCoroutine(Bath1_OpenDoor.DoorMoveClose());
-                            BOpening1 = false;
-                        }
-                    }
-                }
-
-                else if (hit.transform.gameObject.name == ("ToiletDoor2"))
-                {
-                    if (BOpening2 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath2_OpenDoor.StartCoroutine(Bath2_OpenDoor.DoorMoveOpen());
-                            BOpening2 = true;
-                        }
-                    }
-
-                    else if (BOpening2 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath2_OpenDoor.StartCoroutine(Bath2_OpenDoor.DoorMoveClose());
-                            BOpening2 = false;
-                        }
-                    }
-                }
-
-                else if (hit.transform.gameObject.name == ("ToiletDoor3"))
-                {
-                    if (BOpening3 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath3_OpenDoor.StartCoroutine(Bath3_OpenDoor.DoorMoveOpen());
-                            BOpening3 = true;
-                        }
-                    }
-
-                    else if (BOpening3 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath3_OpenDoor.StartCoroutine(Bath3_OpenDoor.DoorMoveClose());
-                            BOpening3 = false;
-                        }
-                    }
-                }
-                else if (hit.transform.gameObject.name == ("ToiletDoor4"))
-                {
-                    if (BOpening4 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath4_OpenDoor.StartCoroutine(Bath4_OpenDoor.DoorMoveOpen());
-                            BOpening4 = true;
-                        }
-                    }
-
-                    else if (BOpening4 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath4_OpenDoor.StartCoroutine(Bath4_OpenDoor.DoorMoveClose());
-                            BOpening4 = false;
-                        }
-                    }
-                }
-                else if (hit.transform.gameObject.name == ("ToiletDoor5"))
-                {
-                    if (BOpening5 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath5_OpenDoor.StartCoroutine(Bath5_OpenDoor.DoorMoveOpen());
-                            BOpening5 = true;
-                        }
-                    }
-
-                    else if (BOpening5 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath5_OpenDoor.StartCoroutine(Bath5_OpenDoor.DoorMoveClose());
-                            BOpening5 = false;
-                        }
-                    }
-                }
-
-                else if (hit.transform.gameObject.name == ("ToiletDoor6"))
-                {
-                    if (BOpening6 == false)
-                    {
-                        TextUI.text = "문을 열려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath6_OpenDoor.StartCoroutine(Bath6_OpenDoor.DoorMoveOpen());
-                            BOpening6 = true;
-                        }
-                    }
-
-                    else if (BOpening6 == true)
-                    {
-                        TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
-                        if (Input.GetKeyDown(KeyCode.Z))
-                        {
-                            Bath6_OpenDoor.StartCoroutine(Bath6_OpenDoor.DoorMoveClose());
-                            BOpening6 = false;
-                        }
-                    }
+                    playerController.SetCanMove(true);
+                    door.StartCoroutine(door.DoorMoveOpen());
+                    isOpen = true;
                 }
             }
+        }
+        else if (isShow)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                playerController.SetCanMove(true);
+                quizUI.SetActive(false);
+                isShow = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+            }
+        }
+        else
+        {
+            TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                door.StartCoroutine(door.DoorMoveClose());
+                isOpen = false;
+            }
+        }
     }
 
-    public void OpenDoor2()
+    private void door(ref bool isOpen, OpenDoor door)
     {
-        if (Opening2 == false)
+        if (!isOpen)
         {
-
+            TextUI.text = "문을 열려면 (Z)키를 누르세요";
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                door.StartCoroutine(door.DoorMoveOpen());
+                isOpen = true;
+            }
         }
-
-        if (Opening2 == true)
+        else
         {
-            opendoor.DoorMoveOpen();
-        }
-    }
-
-    public void OpenDoor3()
-    {
-        if (Opening3 == false)
-        {
-
-        }
-
-        if (Opening3 == true)
-        {
-            opendoor.DoorMoveOpen();
+            TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                door.StartCoroutine(door.DoorMoveClose());
+                isOpen = false;
+            }
         }
     }
-    public void OpenDoor4()
-    {
-        if (Opening4 == false)
-        {
-
-        }
-
-        if (Opening4 == true)
-        {
-            opendoor.DoorMoveOpen();
-        }
-    }
-    public void OpenDoor5()
-    {
-        if (Opening5 == false)
-        {
-
-        }
-
-        if (Opening5 == true)
-        {
-            opendoor.DoorMoveOpen();
-        }
-    }
-    public void OpenDoor6()
-    {
-        if (Opening6 == false)
-        {
-
-        }
-
-        if (Opening6 == true)
-        {
-            opendoor.DoorMoveOpen();
-        }
-    }
-    public void OpenDoor7()
-    {
-        if (Opening7 == false)
-        {
-
-        }
-
-        if (Opening7 == true)
-        {
-            opendoor.DoorMoveOpen();
-        }
-
-
-    }
-
 
 }
