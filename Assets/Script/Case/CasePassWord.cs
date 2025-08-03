@@ -163,6 +163,16 @@ public class CasePassWord : MonoBehaviour
     private GameObject Room5_Case3;
     [SerializeField]
     private GameObject Room5_Case4;
+
+    [SerializeField]
+    private GameObject Scenes1;
+    [SerializeField]
+    private GameObject Scenes2;
+    [SerializeField]
+    private GameObject Scenes3;
+    [SerializeField]
+    private GameObject Scenes4;
+
     void Start()
     {
 
@@ -317,6 +327,8 @@ public class CasePassWord : MonoBehaviour
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
+            Scenes1.SetActive(false);
+            Scenes2.SetActive(true);
         }
         else
         {
@@ -337,6 +349,8 @@ public class CasePassWord : MonoBehaviour
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
+            Scenes2.SetActive(false);
+            Scenes3.SetActive(true);
         }
         else
         {
@@ -357,6 +371,8 @@ public class CasePassWord : MonoBehaviour
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
+            Scenes3.SetActive(false);
+            Scenes4.SetActive(true);
         }
         else
         {

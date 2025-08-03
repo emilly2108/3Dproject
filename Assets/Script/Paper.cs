@@ -128,8 +128,6 @@ public class Paper : MonoBehaviour
                 paperObject = R3_Paper7;
                 isShowing = ref R3_Showing7;
                 break;
-            default:
-                return;
             case "Room4_Paper1":
                 paperObject = R4_Paper1;
                 isShowing = ref R4_Showing1;

@@ -3,33 +3,55 @@ using TMPro;
 
 public class Case : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [SerializeField] 
+    PlayerController playerController;
 
-    [SerializeField] private GameObject case1;
-    [SerializeField] private GameObject case2;
-    [SerializeField] private GameObject case3;
-    [SerializeField] private GameObject case4;
-    [SerializeField] private GameObject case5;
-    [SerializeField] private GameObject case6;
-    [SerializeField] private GameObject case7;
-    [SerializeField] private GameObject case8;
-    [SerializeField] private GameObject case9;
-    [SerializeField] private GameObject case10;
+    [SerializeField] 
+    private GameObject case1;
+    [SerializeField]
+    private GameObject case2;
+    [SerializeField] 
+    private GameObject case3;
+    [SerializeField] 
+    private GameObject case4;
+    [SerializeField] 
+    private GameObject case5;
+    [SerializeField] 
+    private GameObject case6;
+    [SerializeField] 
+    private GameObject case7;
+    [SerializeField] 
+    private GameObject case8;
+    [SerializeField] 
+    private GameObject case9;
 
-    [SerializeField] private GameObject Crosshair;
-    [SerializeField] private GameObject Text_UI;
-    [SerializeField] public TextMeshProUGUI TextUI;
+    [SerializeField] 
+    private GameObject Crosshair;
+    [SerializeField] 
+    private GameObject Text_UI;
+    [SerializeField] 
+    public TextMeshProUGUI TextUI;
 
-    [SerializeField] private OpenCase Room1_OpenCase1;
-    [SerializeField] private OpenCase Room1_OpenCase2;
-    [SerializeField] private OpenCase Room3_OpenCase1;
-    [SerializeField] private OpenCase Room3_OpenCase2;
-    [SerializeField] private OpenCase Room3_OpenCase3;
-    [SerializeField] private OpenCase Room5_OpenCase1;
-    [SerializeField] private OpenCase Room5_OpenCase2;
-    [SerializeField] private OpenCase Room5_OpenCase3;
-    [SerializeField] private OpenCase Room5_OpenCase4;
-    [SerializeField] private OpenCase Room5_OpenCase5;
+    [SerializeField] 
+    private OpenCase Room1_OpenCase1;
+    [SerializeField] 
+    private OpenCase Room1_OpenCase2;
+    [SerializeField] 
+    private OpenCase Room3_OpenCase1;
+    [SerializeField] 
+    private OpenCase Room3_OpenCase2;
+    [SerializeField] 
+    private OpenCase Room3_OpenCase3;
+    [SerializeField] 
+    private OpenCase Room5_OpenCase1;
+    [SerializeField] 
+    private OpenCase Room5_OpenCase2;
+    [SerializeField] 
+    private OpenCase Room5_OpenCase3;
+    [SerializeField] 
+    private OpenCase Room5_OpenCase4;
+    [SerializeField] 
+    private OpenCase Room5_OpenCase5;
 
     public bool Solve1 = false;
     public bool Solve2 = false;
@@ -51,15 +73,16 @@ public class Case : MonoBehaviour
     public bool Showing7 = false;
     public bool Showing8 = false;
     public bool Showing9 = false;
-    public bool Showing10 = false;
 
-    private bool[] opening = new bool[10];
+    private bool[] opening = new bool[9];
+    private bool opening10 = false;
     private bool IsTouch = false;
 
     void Update()
     {
         OpenCase();
         CloseShow();
+        Case_Open10();
     }
 
     void OpenCase()
@@ -102,9 +125,6 @@ public class Case : MonoBehaviour
                 break;
             case "Room5_case4":
                 HandleCaseInteraction(8, Solve9, ref Showing9, Room5_OpenCase4, case9);
-                break;
-            case "Room5_case5":
-                HandleCaseInteraction(9, Solve10, ref Showing10, Room5_OpenCase5, case10);
                 break;
         }
     }
@@ -154,7 +174,6 @@ public class Case : MonoBehaviour
         if (Showing7 && Input.GetKeyDown(KeyCode.R)) CloseCase(ref Showing7, case7);
         if (Showing8 && Input.GetKeyDown(KeyCode.R)) CloseCase(ref Showing8, case8);
         if (Showing9 && Input.GetKeyDown(KeyCode.R)) CloseCase(ref Showing9, case9);
-        if (Showing10 && Input.GetKeyDown(KeyCode.R)) CloseCase(ref Showing10, case10);
     }
 
     void CloseCase(ref bool showing, GameObject caseUI)
@@ -164,5 +183,36 @@ public class Case : MonoBehaviour
         showing = false;
         Text_UI.SetActive(true);
         Crosshair.SetActive(true);
+    }
+
+    private void Case_Open10()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+        IsTouch = Physics.Raycast(ray, out hit, 1.5f);
+        if (hit.transform != null && hit.transform.gameObject.name == "Room5_case5")
+        {
+            if (Solve10 == true)
+            {
+                if (opening10 == false)
+                {
+                    TextUI.text = "서랍을 열려면 (Z)키를 누르세요";
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        opening10 = true;
+                        Room5_OpenCase5.StartCoroutine(Room5_OpenCase5.CaseOpen());
+                    }
+                }
+                else if(opening10 == true)
+                {
+                    TextUI.text = "서랍을 닫으려면 (Z)키를 누르세요";
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        Room5_OpenCase5.StartCoroutine(Room5_OpenCase5.CaseClose());
+                        opening10 = false;
+                    }
+                }
+            }
+        }
     }
 }

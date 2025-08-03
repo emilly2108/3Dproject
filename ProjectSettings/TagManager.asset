@@ -14,6 +14,8 @@ TagManager:
   - ChaseStart1
   - ChaseEnd1
   - Hole
+  - Chair
+  - Puzzle
   layers:
   - Default
   - TransparentFX
