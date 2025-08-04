@@ -63,6 +63,7 @@ public class ChairPuzzle : MonoBehaviour
         string num6 = Chair1text6.text;
         string num7 = Chair1text7.text;
         string num8 = Chair1text8.text;
+
         if (num1 == "D" && num2 == ""&& num3 == "L" && num4 == "N" && num5 == "D"&& num6 == "T"&& num7 == ""&& num8 == "")
         {
             Case.Solve[9] = true;

@@ -14,7 +14,7 @@ public class Case : MonoBehaviour
     private OpenCase[] openCases;
     public int numberofCase = 10;
 
-    private bool opening10 = false;
+    private bool opening9 = false;
 
     public bool[] Showing;
     public bool[] Solve;
@@ -131,11 +131,11 @@ public class Case : MonoBehaviour
 
         if (!Solve[9]) return; 
 
-        TextUI.text = opening10 ? "서랍을 닫으려면 (Z)키를 누르세요" : "서랍을 열려면 (Z)키를 누르세요";
+        TextUI.text = opening9 ? "서랍을 닫으려면 (Z)키를 누르세요" : "서랍을 열려면 (Z)키를 누르세요";
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (!opening10)
+            if (!opening9)
             {
                 openCases[9].StartCoroutine(openCases[9].CaseOpen());
             }
@@ -143,7 +143,7 @@ public class Case : MonoBehaviour
             {
                 openCases[9].StartCoroutine(openCases[9].CaseClose());
             }
-            opening10 = !opening10;
+            opening9 = !opening9;
         }
 
     }
