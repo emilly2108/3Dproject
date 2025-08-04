@@ -221,7 +221,7 @@ public class Door : MonoBehaviour
                 }
             }
         }
-        
+
         else
         {
             TextUI.text = "문을 닫으려면 (Z)키를 누르세요";

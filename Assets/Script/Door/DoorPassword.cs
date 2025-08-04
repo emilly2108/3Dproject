@@ -166,7 +166,7 @@ public class DoorPassword : MonoBehaviour
         if (R5answer1 == Room5text1.text && R5answer2 == Room5text2.text && R5answer3 == Room5text3.text && R5answer4 == Room5text4.text)
         {
             playerController.SetCanMove(true);
-            door.Solve5 = true;
+            door.Solve5  = true;
             Room5_DoorQ.SetActive(false);
             door.Show5 = false;
             Text_UI.SetActive(true);

@@ -1,83 +1,44 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Paper : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     PlayerController playerController;
     public Monitor monitor;
 
     [SerializeField]
-    private GameObject R1_Paper1;
-    [SerializeField]
-    private GameObject R3_Paper1;
-    [SerializeField]
-    private GameObject R3_Paper2;
-    [SerializeField]
-    private GameObject R3_Paper3;
-    [SerializeField]
-    private GameObject R3_Paper4;
-    [SerializeField]
-    private GameObject R3_Paper5;
-    [SerializeField]
-    private GameObject R3_Paper6;
-    [SerializeField]
-    private GameObject R3_Paper7;
-    [SerializeField]
-    private GameObject R4_Paper1;
-    [SerializeField]
-    private GameObject R4_Paper2;
-    [SerializeField]
-    private GameObject R4_Paper3;
-    [SerializeField]
-    private GameObject R4_Paper4;
-    [SerializeField]
-    private GameObject R4_Paper5;
-    [SerializeField]
-    private GameObject R5_Paper1;
-    [SerializeField]
-    private GameObject R5_Paper2;
-    [SerializeField]
-    private GameObject R5_Paper3;
-    [SerializeField]
-    private GameObject R5_Paper4;
-    [SerializeField]
-    private GameObject R5_Paper5;
+    private GameObject[] paper;
+    public bool[] Showing;
 
     [SerializeField]
     private GameObject Crosshair;
     [SerializeField]
     private GameObject Text_UI;
 
-
-    private bool R1_Showing1 = false;
-    private bool R3_Showing1 = false;
-    private bool R3_Showing2 = false;
-    private bool R3_Showing3 = false;
-    private bool R3_Showing4 = false;
-    private bool R3_Showing5 = false;
-    private bool R3_Showing6 = false;
-    private bool R3_Showing7 = false;
-    private bool R4_Showing1 = false;
-    private bool R4_Showing2 = false;
-    private bool R4_Showing3 = false;
-    private bool R4_Showing4 = false;
-    private bool R4_Showing5 = false;
-    private bool R5_Showing1 = false;
-    private bool R5_Showing2 = false;
-    private bool R5_Showing3 = false;
-    private bool R5_Showing4 = false;
-    private bool R5_Showing5 = false;
+    private Dictionary<string, int> paperNameIndex = new Dictionary<string, int>();
 
     void Start()
     {
+        Showing = new bool[paper.Length];
 
+        for (int i = 0; i < paper.Length; i++)
+        {
+            if (paper[i] != null)
+            {
+                string name = paper[i].name.Trim();
+                if (!paperNameIndex.ContainsKey(name))
+                {
+                    paperNameIndex.Add(name, i);
+                }
+            }
+        }
     }
 
     void Update()
     {
         OpenPaper();
-        
     }
 
     public void OpenPaper()
@@ -91,102 +52,24 @@ public class Paper : MonoBehaviour
         monitor.TextUI.text = "종이를 보려면 (Z)키를 누르세요";
 
         string paperName = hit.transform.gameObject.name.Trim();
-        GameObject paperObject = null;
-        ref bool isShowing = ref R1_Showing1; 
 
-        switch (paperName)
-        {
-            case "Room1_Paper1":
-                paperObject = R1_Paper1;
-                isShowing = ref R1_Showing1;
-                break;
-            case "Room3_Paper1":
-                paperObject = R3_Paper1;
-                isShowing = ref R3_Showing1;
-                break;
-            case "Room3_Paper2":
-                paperObject = R3_Paper2;
-                isShowing = ref R3_Showing2;
-                break;
-            case "Room3_Paper3":
-                paperObject = R3_Paper3;
-                isShowing = ref R3_Showing3;
-                break;
-            case "Room3_Paper4":
-                paperObject = R3_Paper4;
-                isShowing = ref R3_Showing4;
-                break;
-            case "Room3_Paper5":
-                paperObject = R3_Paper5;
-                isShowing = ref R3_Showing5;
-                break;
-            case "Room3_Paper6":
-                paperObject = R3_Paper6;
-                isShowing = ref R3_Showing6;
-                break;
-            case "Room3_Paper7":
-                paperObject = R3_Paper7;
-                isShowing = ref R3_Showing7;
-                break;
-            case "Room4_Paper1":
-                paperObject = R4_Paper1;
-                isShowing = ref R4_Showing1;
-                break;
-            case "Room4_Paper2":
-                paperObject = R4_Paper2;
-                isShowing = ref R4_Showing2;
-                break;
-            case "Room4_Paper3":
-                paperObject = R4_Paper3;
-                isShowing = ref R4_Showing3;
-                break;
-            case "Room4_Paper4":
-                paperObject = R4_Paper4;
-                isShowing = ref R4_Showing4;
-                break;
-            case "Room4_Paper5":
-                paperObject = R4_Paper5;
-                isShowing = ref R4_Showing5;
-                break;
-            case "Room5_Paper1":
-                paperObject = R5_Paper1;
-                isShowing = ref R5_Showing1;
-                break;
-            case "Room5_Paper2":
-                paperObject = R5_Paper2;
-                isShowing = ref R5_Showing2;
-                break;
-            case "Room5_Paper3":
-                paperObject = R5_Paper3;
-                isShowing = ref R5_Showing3;
-                break;
-            case "Room5_Paper4":
-                paperObject = R5_Paper4;
-                isShowing = ref R5_Showing4;
-                break;
-            case "Room5_Paper5":
-                paperObject = R5_Paper5;
-                isShowing = ref R5_Showing5;
-                break;
-        }
+        if (!paperNameIndex.TryGetValue(paperName, out int index)) return;
 
-        if (Input.GetKeyDown(KeyCode.Z) && !isShowing)
+        if (Input.GetKeyDown(KeyCode.Z) && !Showing[index])
         {
             playerController.SetCanMove(false);
-            paperObject.SetActive(true);
-            isShowing = true;
+            paper[index].SetActive(true);
+            Showing[index] = true;
             Text_UI.SetActive(false);
             Crosshair.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.R) && isShowing)
+        else if (Input.GetKeyDown(KeyCode.R) && Showing[index])
         {
             playerController.SetCanMove(true);
-            paperObject.SetActive(false);
-            isShowing = false;
+            paper[index].SetActive(false);
+            Showing[index] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
         }
     }
-
-
 }

@@ -198,16 +198,16 @@ public class CasePassWord : MonoBehaviour
         int R1num3 = int.Parse(Case1text3.text);
         if (R1num1 == C1_answer1 && R1num2 == C1_answer2 && R1num3 == C1_answer3)
         {
-            Case.Solve1 = true;
+            Case.Solve[0] = true;
             Room1_Case1.SetActive(false);
-            Case.Showing1 = false;
+            Case.Showing[0] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve1 = false;
+            Case.Solve[0] = false;
         }
     }
 
@@ -219,16 +219,16 @@ public class CasePassWord : MonoBehaviour
         string R1text4 = Case2text4.text;
         if (R1text1 == C2_answer1 && R1text2 == C2_answer2 && R1text3 == C2_answer3 && R1text4 == C2_answer4)
         {
-            Case.Solve2 = true;
+            Case.Solve[1] = true;
             Room1_Case2.SetActive(false);
-            Case.Showing2 = false;
+            Case.Showing[1] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve2 = false;
+            Case.Solve[1] = false;
         }
     }
 
@@ -240,16 +240,16 @@ public class CasePassWord : MonoBehaviour
         string R3text4 = Case3text4.text;
         if (R3text1 == C3_answer1 && R3text2 == C3_answer2 && R3text3 == C3_answer3 && R3text4 == C3_answer4)
         {
-            Case.Solve3 = true;
+            Case.Solve[2] = true;
             Room3_Case1.SetActive(false);
-            Case.Showing3 = false;
+            Case.Showing[2] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve3 = false;
+            Case.Solve[2] = false;
         }
     }
     private void R3Case2PassWord()
@@ -259,16 +259,16 @@ public class CasePassWord : MonoBehaviour
         int R3num3 = int.Parse(Case4text3.text);
         if (R3num1 == C4_answer1 && R3num2 == C4_answer2 && R3num3 == C4_answer3)
         {
-            Case.Solve4 = true;
+            Case.Solve[3] = true;
             Room3_Case2.SetActive(false);
-            Case.Showing4 = false;
+            Case.Showing[3] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve4 = false;
+            Case.Solve[3] = false;
         }
     }
     
@@ -280,16 +280,16 @@ public class CasePassWord : MonoBehaviour
         int R3_2num4 = int.Parse(Case5text4.text);
         if (R3_2num1 == C5_answer1 && R3_2num2 == C5_answer2 && R3_2num3 == C5_answer3 && R3_2num4 == C5_answer4)
         {
-            Case.Solve5 = true;
+            Case.Solve[4] = true;
             Room3_Case3.SetActive(false);
-            Case.Showing5 = false;
+            Case.Showing[4] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve5 = false;
+            Case.Solve[4] = false;
         }
     }
 
@@ -300,16 +300,16 @@ public class CasePassWord : MonoBehaviour
         int R5num3 = int.Parse(Case6text3.text);
         if (R5num1 == C6_answer1 && R5num2 == C6_answer2 && R5num3 == C6_answer3)
         {
-            Case.Solve6 = true;
+            Case.Solve[5] = true;
             Room5_Case1.SetActive(false);
-            Case.Showing6 = false;
+            Case.Showing[5] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
         }
         else
         {
-            Case.Solve6 = false;
+            Case.Solve[5] = false;
         }
     }
 
@@ -321,9 +321,9 @@ public class CasePassWord : MonoBehaviour
         string R5text4 = Case7text4.text;
         if (R5text1 == C7_answer1 && R5text2 == C7_answer2 && R5text3 == C7_answer3 && R5text4 == C7_answer4)
         {
-            Case.Solve7 = true;
+            Case.Solve[6] = true;
             Room5_Case2.SetActive(false);
-            Case.Showing7 = false;
+            Case.Showing[6] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
@@ -332,7 +332,7 @@ public class CasePassWord : MonoBehaviour
         }
         else
         {
-            Case.Solve7 = false;
+            Case.Solve[6] = false;
         }
     }
     private void R5Case3PassWord()
@@ -343,9 +343,9 @@ public class CasePassWord : MonoBehaviour
         string R5_1text4 = Case8text4.text;
         if (R5_1text1 == C8_answer1 && R5_1text2 == C8_answer2 && R5_1text3 == C8_answer3 && R5_1text4 == C8_answer4)
         {
-            Case.Solve8 = true;
+            Case.Solve[7] = true;
             Room5_Case3.SetActive(false);
-            Case.Showing8 = false;
+            Case.Showing[7] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
@@ -354,7 +354,7 @@ public class CasePassWord : MonoBehaviour
         }
         else
         {
-            Case.Solve8 = false;
+            Case.Solve[7] = false;
         }
     }
 
@@ -365,9 +365,9 @@ public class CasePassWord : MonoBehaviour
         int R5_1num3 = int.Parse(Case9text3.text);
         if (R5_1num1 == C9_answer1 && R5_1num2 == C9_answer2 && R5_1num3 == C9_answer3)
         {
-            Case.Solve9 = true;
+            Case.Solve[8] = true;
             Room5_Case4.SetActive(false);
-            Case.Showing9 = false;
+            Case.Showing[8] = false;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
             playerController.SetCanMove(true);
@@ -376,7 +376,7 @@ public class CasePassWord : MonoBehaviour
         }
         else
         {
-            Case.Solve9 = false;
+            Case.Solve[8] = false;
         }
     }
 }
