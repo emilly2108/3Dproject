@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c228bf6a12fbb97409d96979919319dd, type: 3}
   m_Name: Puzzle2
   m_EditorClassIdentifier: 
-  itemName: "\uC758\uBB38\uC758 \uD37C\uC990 \uC870\uAC01 1"
+  itemName: "\uC758\uBB38\uC758 \uD37C\uC990 \uC870\uAC012"
   itemDesc: "\uBB34\uC5B8\uAC00 \uADF8\uB824\uC838 \uC788\uB294 \uB4EF\uD55C \uD37C\uC990\uC870\uAC01"
   itemType: 0
   itemImage: {fileID: 21300000, guid: 387668571657175418dde29021280eb8, type: 3}

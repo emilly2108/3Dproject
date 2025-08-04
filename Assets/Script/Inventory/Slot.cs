@@ -44,15 +44,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         SetColor(1);
     }
 
-    // 아이템 개수 조정
-    /*public void SetSlotCount(int _count)
-    {
-        itemCount += _count;
-
-        if (itemCount <= 0)
-            ClearSlot();
-    }*/
-
     // 슬롯 초기화
     public void ClearSlot()
     {

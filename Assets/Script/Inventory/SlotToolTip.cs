@@ -32,7 +32,7 @@ public class SlotToolTip : MonoBehaviour
         if (_item.itemType == Item.ItemType.Used)
             txt_ItemHowtoUsed.text = "우클릭 - 사용하기";
         else
-            txt_ItemHowtoUsed.text = "";
+            txt_ItemHowtoUsed.text = "우클릭 - 사용하기";
     }
 
     public void HideToolTip()
