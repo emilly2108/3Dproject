@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //✅
 
     [SerializeField]
     private float walkSpeed;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    // 움직임 가능?
+    private bool isMoveable = true;
 
 
     private bool isWalk = false;
@@ -57,71 +60,31 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
 
-        // �ʱ�ȭ
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
     }
     void Update()
     {
+        if (!isMoveable) return;
 
         IsGround();
         TryJump();
         TryRun();
-        TryCrouch();
         Move();
         MoveCheck();
         CameraRotation();
         CharacterRotation();
     }
 
-    // �ɱ� �õ�
-    private void TryCrouch()
+    public void SetCanMove(bool canMove)
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            Crouch();
-        }
+        isMoveable = canMove;
     }
 
-
-    // �ɱ� ����
-    private void Crouch()
+    public bool GetCanMove()
     {
-        isCrouch = !isCrouch;
-
-        if (isCrouch)
-        {
-            applySpeed = crouchSpeed;
-            applyCrouchPosY = crouchPosY;
-        }
-        else
-        {
-            applySpeed = walkSpeed;
-            applyCrouchPosY = originPosY;
-        }
-
-        StartCoroutine(CrouchCoroutine());
-
-    }
-
-
-    IEnumerator CrouchCoroutine()
-    {
-
-        float _posY = theCamera.transform.localPosition.y;
-        int count = 0;
-
-        while (_posY != applyCrouchPosY)
-        {
-            count++;
-            _posY = Mathf.Lerp(_posY, applyCrouchPosY, 0.3f);
-            theCamera.transform.localPosition = new Vector3(0, _posY, 0);
-            if (count > 15)
-                break;
-            yield return null;
-        }
-        theCamera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0f);
+        return isMoveable;
     }
 
 
@@ -145,9 +108,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-
-        if (isCrouch)
-            Crouch();
         myRigid.linearVelocity = transform.up * jumpForce;
     }
 
@@ -165,18 +125,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // �޸��� ����
+
     private void Running()
     {
-        if (isCrouch)
-            Crouch();
 
         isRun = true;
         applySpeed = runSpeed;
     }
 
 
-    // �޸��� ���
+
     private void RunningCancel()
     {
         isRun = false;
@@ -184,7 +142,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ������ ����
+
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -199,7 +157,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ������ üũ
+
     private void MoveCheck()
     {
         if (!isRun && !isCrouch && isGround)
@@ -213,7 +171,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // �¿� ĳ���� ȸ��
+
     private void CharacterRotation()
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");
@@ -223,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // ���� ī�޶� ȸ��
+
     private void CameraRotation()
     {
         if (!pauseCameraRotation)
@@ -258,7 +216,6 @@ public class PlayerController : MonoBehaviour
         pauseCameraRotation = false;
     }
 
-    // ���� ���� �� ��ȯ
     public bool GetRun()
     {
         return isRun;
@@ -267,14 +224,24 @@ public class PlayerController : MonoBehaviour
     {
         return isWalk;
     }
-    public bool GetCrouch()
-    {
-        return isCrouch;
-    }
     public bool GetIsGround()
     {
         return isGround;
     }
+    // 스피드 아이템 사용
+    public void StartSpeedBoost(float duration) // 스피드 증가 아이템 호출용(IEnumerator는 직접 호출 불가)
+    {
+        StartCoroutine(SpeedCoroutine(duration));
+    }
+    private IEnumerator SpeedCoroutine(float second)
+    {
+        float beforeSpeed = applySpeed;
+        applySpeed += 10; 
+
+        yield return new WaitForSeconds(second);
+        if (isRun)
+            applySpeed = runSpeed;
+        else
+            applySpeed = walkSpeed;
+    }
 }
-
-
