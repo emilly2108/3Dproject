@@ -189,6 +189,17 @@ public class Door : MonoBehaviour
 
     private void PuzzleDoor(ref bool isOpen, ref bool isShow, bool isSolved, GameObject quizUI, OpenDoor door)
     {
+        if (isShow)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                playerController.SetCanMove(true);
+                quizUI.SetActive(false);
+                isShow = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+            }
+        }
         if (!isOpen)
         {
             TextUI.text = "문을 열려면 (Z)키를 누르세요";
@@ -210,17 +221,7 @@ public class Door : MonoBehaviour
                 }
             }
         }
-        else if (isShow)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                playerController.SetCanMove(true);
-                quizUI.SetActive(false);
-                isShow = false;
-                Text_UI.SetActive(true);
-                Crosshair.SetActive(true);
-            }
-        }
+        
         else
         {
             TextUI.text = "문을 닫으려면 (Z)키를 누르세요";
