@@ -26491,7 +26491,7 @@ GameObject:
   - component: {fileID: 1029870526}
   - component: {fileID: 1029870527}
   m_Layer: 0
-  m_Name: MonsterStartTrigger1 (1)
+  m_Name: MonsterStartTrigger2
   m_TagString: ChaseStart2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43041,7 +43041,7 @@ GameObject:
   - component: {fileID: 1729871797}
   - component: {fileID: 1729871796}
   m_Layer: 0
-  m_Name: MonsterEndTrigger1 (1)
+  m_Name: MonsterEndTrigger2
   m_TagString: ChaseEnd2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
