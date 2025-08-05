@@ -14,6 +14,8 @@ public class LifeSystem : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private GameObject holeObject;
+    [SerializeField] private GameObject monster;
+    [SerializeField] private MonsterChaser monsterChaser;
 
     private void Start()
     {
@@ -45,21 +47,32 @@ public class LifeSystem : MonoBehaviour
     //구멍(함정) 추락시
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hole"))
+        if (other.CompareTag("Hole")|| other.CompareTag("Monster"))
         {
-            Debug.Log("Hole에 떨어졌다");
+            Debug.Log("HP -1");
             ChangeHP(-1);
-            StartCoroutine(FadeSequence(holeObject)); 
+            StartCoroutine(FadeSequence(holeObject,other)); 
         }
+
     }
 
     // 화면 페이드 + 위치 초기화 + Hole 비활성화(중복처리 방지)
-    private IEnumerator FadeSequence(GameObject holeObject)
+    private IEnumerator FadeSequence(GameObject holeObject, Collider other)
     {
         holeObject.SetActive(false); 
 
         yield return StartCoroutine(FadeOut());
-        transform.position = new Vector3(22.21f, 0.188f, -15.93f);
+        if (other.CompareTag("Hole"))
+            transform.position = new Vector3(22.21f, 0.188f, -15.93f);
+        else if (other.CompareTag("Monster"))
+        {
+            transform.position = new Vector3(-21f, 1f, -16f);
+            monsterChaser.PauseChase();
+            monster.transform.position = new Vector3(-34f, -8f, -30f);
+            //monsterChaser.chaseStartTrigger.SetActive(true);
+        }
+            
+
         yield return new WaitForSeconds(2f); 
         yield return StartCoroutine(FadeIn());
 

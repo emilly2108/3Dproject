@@ -17,6 +17,8 @@ TagManager:
   - Chair
   - Puzzle
   - ChaseStart2
+  - ChaseEnd2
+  - Monster
   layers:
   - Default
   - TransparentFX

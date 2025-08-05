@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class MonsterChaser : MonoBehaviour
 {
-    [SerializeField] private GameObject chaseStartTrigger;
-    [SerializeField] private GameObject chaseEndTrigger; //추격 끝난 후 비활성화 위해 
+    [SerializeField] public GameObject chaseStartTrigger;
+    [SerializeField] public GameObject chaseEndTrigger; //추격 끝난 후 비활성화 위해 
 
     public float chaseSpeed = 3.5f;
 
@@ -30,8 +30,15 @@ public class MonsterChaser : MonoBehaviour
         target = chaseTarget;
         isChasing = true;
         agent.speed = chaseSpeed;
+        chaseStartTrigger.SetActive(false);
     }
-
+    public void PauseChase()
+    {
+        isChasing = false;
+        agent.ResetPath();
+        chaseStartTrigger.SetActive(true);
+        chaseEndTrigger.SetActive(true);
+    }
     public void StopChase()
     {
         isChasing = false;
