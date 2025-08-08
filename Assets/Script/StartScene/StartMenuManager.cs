@@ -2,7 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement; 
 public class StartMenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject settingsUI; 
+    [SerializeField] private GameObject settingsUI;
+
+    private void Start()
+    {
+        
+        settingsUI.SetActive(false);
+    }
+
     public void LoadShow1Scene()
     {
         SceneManager.LoadScene("Show 1");
