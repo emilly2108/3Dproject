@@ -75,6 +75,7 @@ public class Box_Door : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
+
                 if (!Solve[index])
                 {
                     playerController.SetCanMove(false);

@@ -27,6 +27,7 @@ public class MonsterChaser : MonoBehaviour
 
     public void StartChase(Transform chaseTarget)
     {
+        SoundManager.instance.PlayBGM("chaseBGM");
         target = chaseTarget;
         isChasing = true;
         agent.speed = chaseSpeed;
@@ -34,6 +35,7 @@ public class MonsterChaser : MonoBehaviour
     }
     public void PauseChase()
     {
+        SoundManager.instance.PlayBGM("mainBGM");
         isChasing = false;
         agent.ResetPath();
         chaseStartTrigger.SetActive(true);
@@ -41,6 +43,7 @@ public class MonsterChaser : MonoBehaviour
     }
     public void StopChase()
     {
+        SoundManager.instance.PlayBGM("mainBGM");
         isChasing = false;
         agent.ResetPath();
         gameObject.SetActive(false);
