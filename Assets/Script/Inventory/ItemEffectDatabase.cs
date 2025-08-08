@@ -21,6 +21,7 @@ public class ItemEffectDatabase : MonoBehaviour
     public Metal metal;
     public Monitor monitor;
     public Puzzle puzzle;
+    public Luminol_Paper paper;
     //필요한 컴포넌트
 
     [SerializeField]
@@ -118,7 +119,20 @@ public class ItemEffectDatabase : MonoBehaviour
                     _slot.ClearSlot();
                 }
             }
-            
+            else if (_item.itemName == "루미놀 병")
+            {
+                if (paper.Paper_before == true)
+                {
+                    paper.ClearPaper();
+                    paper.Paper_after = true;
+                    paper.Paper_before = false;
+                    playerController.SetCanMove(false);
+                    paper.monitor.Text_UI.SetActive(false);
+                    paper.monitor.Crosshair.SetActive(false);
+
+                    _slot.ClearSlot();
+                }
+            }
         }
     }
 

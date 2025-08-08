@@ -65,7 +65,7 @@ public class ChairPuzzle : MonoBehaviour
         string num8 = Chair1text8.text;
         if (num1 == "D" && num2 == ""&& num3 == "L" && num4 == "N" && num5 == "D"&& num6 == "T"&& num7 == ""&& num8 == "")
         {
-            Case.Solve10 = true;
+            Case.Solve[9] = true;
             Chair.ChairSolveing = true;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
@@ -81,7 +81,7 @@ public class ChairPuzzle : MonoBehaviour
         }
         else
         {
-            Case.Solve10 = false;
+            Case.Solve[9] = false;
         }
     }
 
