@@ -16,6 +16,11 @@ TagManager:
   - Hole
   - Chair
   - Puzzle
+  - ChaseStart2
+  - ChaseEnd2
+  - Monster
+  - Luminol_Paper
+  - MorgueBox_Door
   layers:
   - Default
   - TransparentFX

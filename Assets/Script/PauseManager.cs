@@ -34,12 +34,14 @@ public class PauseManager : MonoBehaviour
         pauseUI.SetActive(false);
     }
 
-    public void GoToHomeScene()
+    public void GoToStartScene()
     {
         playerController.SetCanMove(true);  // 이동 허용
         Debug.Log("홈화면으로 이동");
+        isPaused = false;
+        Time.timeScale = 1f;
+        pauseUI.SetActive(false);
+        SceneManager.LoadScene("StartScene");
 
-
-        // SceneManager.LoadScene("HomeScene");
     }
 }

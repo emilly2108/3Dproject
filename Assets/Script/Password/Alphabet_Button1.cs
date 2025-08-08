@@ -53,7 +53,7 @@ public class Alphabet_Button1 : MonoBehaviour
         }
         else if (currentNumber1 == 4)
         {
-            currentAlphabet1 = "L";
+            currentAlphabet1 = "N";
             alphabet1.text = currentAlphabet1.ToString();
         }
         else if (currentNumber1 == 5)
@@ -78,12 +78,12 @@ public class Alphabet_Button1 : MonoBehaviour
         }
         else if (currentNumber1 == 9)
         {
-            currentAlphabet1 = "Y";
+            currentAlphabet1 = "L";
             alphabet1.text = currentAlphabet1.ToString();
         }
         else if (currentNumber1 == 10)
         {
-            currentAlphabet1 = "M";
+            currentAlphabet1 = "V";
             alphabet1.text = currentAlphabet1.ToString();
         }
     }

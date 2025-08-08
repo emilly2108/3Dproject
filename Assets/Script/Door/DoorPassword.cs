@@ -48,6 +48,14 @@ public class DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Room5text4;
 
+    // room6의 방 자물쇠 문자
+    [SerializeField]
+    private TextMeshProUGUI Room6text1;
+    [SerializeField]
+    private TextMeshProUGUI Room6text2;
+    [SerializeField]
+    private TextMeshProUGUI Room6text3;
+
     //room1의 자물쇠의 정답
     private int R1answer1 = 3;
     private int R1answer2 = 1;
@@ -69,8 +77,13 @@ public class DoorPassword : MonoBehaviour
     //room5의 자물쇠의 정답
     private string R5answer1 = "D";
     private string R5answer2 = "A";
-    private string R5answer3 = "L";
-    private string R5answer4 = "E";
+    private string R5answer3 = "E";
+    private string R5answer4 = "N";
+
+    //room6의 자물쇠의 정답
+    private int R6answer1 = 9;
+    private int R6answer2 = 5;
+    private int R6answer3 = 2;
 
     // 문 퀴즈 오브젝트 입력
     [SerializeField]
@@ -81,6 +94,8 @@ public class DoorPassword : MonoBehaviour
     private GameObject Room4_DoorQ;
     [SerializeField]
     private GameObject Room5_DoorQ;
+    [SerializeField]
+    private GameObject Room6_DoorQ;
 
     void Start()
     {
@@ -94,6 +109,7 @@ public class DoorPassword : MonoBehaviour
         Door3PassWord();
         Door4PassWord();
         Door5PassWord();
+        Door6PassWord();
     }
     private void Door1PassWord()
     {
@@ -175,6 +191,27 @@ public class DoorPassword : MonoBehaviour
         else
         {
             door.Solve5 = false;
+        }
+    }
+
+    private void Door6PassWord()
+    {
+        int R6num1 = int.Parse(Room6text1.text);
+        int R6num2 = int.Parse(Room6text2.text);
+        int R6num3 = int.Parse(Room6text3.text);
+        if (R6num1 == R6answer1 && R6num2 == R6answer2 && R6num3 == R6answer3 )
+
+        {
+            playerController.SetCanMove(true); 
+            door.Solve6 = true;
+            Room6_DoorQ.SetActive(false);
+            door.Show6 = false;
+            Text_UI.SetActive(true);
+            Crosshair.SetActive(true);
+        }
+        else
+        {
+            door.Solve6 = false;
         }
     }
 }
