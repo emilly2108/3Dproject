@@ -120,6 +120,7 @@ public class DoorPassword : MonoBehaviour
         if (R1num1 == R1answer1 && R1num2 == R1answer2 && R1num3 == R1answer3 && R1num4 == R1answer4)
 
         {
+             
             playerController.SetCanMove(true);  // 이동 허용
             door.Solve1 = true;
             Room1_DoorQ.SetActive(false);
@@ -141,6 +142,7 @@ public class DoorPassword : MonoBehaviour
         string R3str4 = (Room3text4.text);
         if (R3answer1 == Room3text1.text && R3answer2 == Room3text2.text && R3answer3 == Room3text3.text && R3answer4 == Room3text4.text)
         {
+             
             playerController.SetCanMove(true);
             door.Solve3 = true;
             Room3_DoorQ.SetActive(false);
@@ -161,6 +163,7 @@ public class DoorPassword : MonoBehaviour
         string R4str3 = (Room4text3.text);
         if (R4answer1 == Room4text1.text && R4answer2 == Room4text2.text && R4answer3 == Room4text3.text)
         {
+             
             playerController.SetCanMove(true);
             door.Solve4 = true;
             Room4_DoorQ.SetActive(false);
@@ -181,6 +184,7 @@ public class DoorPassword : MonoBehaviour
         string R5str4 = (Room5text4.text);
         if (R5answer1 == Room5text1.text && R5answer2 == Room5text2.text && R5answer3 == Room5text3.text && R5answer4 == Room5text4.text)
         {
+             
             playerController.SetCanMove(true);
             door.Solve5 = true;
             Room5_DoorQ.SetActive(false);
@@ -196,6 +200,7 @@ public class DoorPassword : MonoBehaviour
 
     private void Door6PassWord()
     {
+        
         int R6num1 = int.Parse(Room6text1.text);
         int R6num2 = int.Parse(Room6text2.text);
         int R6num3 = int.Parse(Room6text3.text);

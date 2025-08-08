@@ -81,6 +81,47 @@ public class SoundManager : MonoBehaviour
         }
         Debug.Log("재생 중인" + _name + "사운드가 없습니다");
     }
+    // BGM 재생 (이름으로 찾아서 재생)
+    public void PlayBGM(string _name, bool loop = true)
+    {
+        for (int i = 0; i < bgmSounds.Length; i++)
+        {
+            if (bgmSounds[i].name == _name)
+            {
+                if (audioSourceBgm.clip == bgmSounds[i].clip && audioSourceBgm.isPlaying)
+                {
+                    // 이미 같은 BGM이 재생중이면 그냥 리턴
+                    return;
+                }
+                audioSourceBgm.clip = bgmSounds[i].clip;
+                audioSourceBgm.loop = loop;
+                audioSourceBgm.Play();
+                return;
+            }
+        }
+        Debug.LogWarning(_name + " BGM이 SoundManager에 등록되어 있지 않습니다.");
+    }
 
+    // BGM 정지
+    public void StopBGM()
+    {
+        if (audioSourceBgm.isPlaying)
+            audioSourceBgm.Stop();
+    }
+
+    // BGM 일시정지
+    public void PauseBGM()
+    {
+        if (audioSourceBgm.isPlaying)
+            audioSourceBgm.Pause();
+    }
+
+    // BGM 다시 재생 (일시정지 후)
+    public void ResumeBGM()
+    {
+        if (audioSourceBgm.clip != null && !audioSourceBgm.isPlaying)
+            audioSourceBgm.Play();
+    }
 }
+
 
