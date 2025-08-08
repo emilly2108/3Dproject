@@ -33635,6 +33635,12 @@ MonoBehaviour:
   Room4_DoorQ: {fileID: 1766853027}
   Room5_DoorQ: {fileID: 1515545865}
   Room6_DoorQ: {fileID: 2048561340}
+  hasShownMessage1: 0
+  hasShownMessage2: 0
+  hasShownMessage3: 0
+  hasShownMessage4: 0
+  hasShownMessage5: 0
+  hasShownMessage6: 0
 --- !u!114 &1005131733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50358,7 +50364,6 @@ MonoBehaviour:
   monster1: {fileID: 1307650675}
   monster2: {fileID: 778531291}
   chaseEndTrigger2: {fileID: 1530417889}
-  descText: {fileID: 1545654717}
 --- !u!4 &1574595526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4982510989774133510, guid: c7221ab3fa7c9f34e8dcc4ec7f5be200, type: 3}
@@ -61865,6 +61870,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphabet: {fileID: 596191159}
+--- !u!1 &1905962098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905962100}
+  - component: {fileID: 1905962099}
+  m_Layer: 0
+  m_Name: GuideTextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1905962099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905962098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4018ab0eb6904499122072e414f70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descText: {fileID: 1545654717}
+  messages:
+  - "WASD\uB85C \uC774\uB3D9, Space\uB85C \uC810\uD504, Shift\uB85C \uB2EC\uB9AC\uAE30"
+  - "Z \uB610\uB294 Enter\uB85C \uBB3C\uAC74\uB4E4\uC744 \uC870\uC0AC\uD558\uC790."
+  - "I\uB97C \uB20C\uB7EC \uC778\uBCA4\uD1A0\uB9AC\uB97C \uD655\uC778\uD560 \uC218
+    \uC788\uB2E4. (\uB2EB\uAE30:I)"
+--- !u!4 &1905962100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905962098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.8099995, y: 1.5939999, z: -10.360001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1907388382
 GameObject:
   m_ObjectHideFlags: 0
@@ -72118,3 +72173,4 @@ SceneRoots:
   - {fileID: 1225782023}
   - {fileID: 1150099197}
   - {fileID: 1528108105}
+  - {fileID: 1905962100}
