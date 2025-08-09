@@ -113,7 +113,10 @@ public class Monitor : MonoBehaviour
         IsTouch = Physics.Raycast(ray, out hit, 1.5f);
         if (IsTouch)
         {
-            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Item") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Metal") && !hit.transform.CompareTag("Chair") && !hit.transform.CompareTag("Puzzle") && !hit.transform.CompareTag("MorgueBox_Door") && !hit.transform.CompareTag("Luminol_Paper"))
+            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case") 
+                && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Item") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Metal") 
+                && !hit.transform.CompareTag("Chair") && !hit.transform.CompareTag("Puzzle") && !hit.transform.CompareTag("MorgueBox_Door") && !hit.transform.CompareTag("Luminol_Paper")
+                && !hit.transform.CompareTag("MainDoor"))
             {
                 TextUI.text = " ";
             }

@@ -99,7 +99,6 @@ public class ItemEffectDatabase : MonoBehaviour
             {
                 if (_item.itemName == "ÀÇ¹®ÀÇ ÆÛÁñ Á¶°¢1")
                 {
-                    Debug.Log("ÆÛÁñÁ¶°¢1 »ç¿ë ½ÃµµµÊ");
                     puzzle.Puzzle1();
                     _slot.ClearSlot();
                 }
@@ -131,6 +130,13 @@ public class ItemEffectDatabase : MonoBehaviour
                     paper.monitor.Crosshair.SetActive(false);
 
                     _slot.ClearSlot();
+                }
+            }
+            else if (_item.itemName == "¿­¼è")
+            {
+                if (hit.transform.CompareTag("MainDoor"))
+                {
+                    Debug.Log("Å»Ãâ, ¿£µù");
                 }
             }
         }
