@@ -56,6 +56,14 @@ public class DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Room6text3;
 
+    // room7의 방 자물쇠 문자
+    [SerializeField]
+    private TextMeshProUGUI Room7text1;
+    [SerializeField]
+    private TextMeshProUGUI Room7text2;
+    [SerializeField]
+    private TextMeshProUGUI Room7text3;
+
     //room1의 자물쇠의 정답
     private int R1answer1 = 3;
     private int R1answer2 = 1;
@@ -85,6 +93,11 @@ public class DoorPassword : MonoBehaviour
     private int R6answer2 = 5;
     private int R6answer3 = 2;
 
+    //room7의 자물쇠의 정답
+    private int R7answer1 = 8;
+    private int R7answer2 = 4;
+    private int R7answer3 = 9;
+
     // 문 퀴즈 오브젝트 입력
     [SerializeField]
     private GameObject Room1_DoorQ;
@@ -96,6 +109,8 @@ public class DoorPassword : MonoBehaviour
     private GameObject Room5_DoorQ;
     [SerializeField]
     private GameObject Room6_DoorQ;
+    [SerializeField]
+    private GameObject Room7_DoorQ;
 
     public bool hasShownMessage1=false;
     public bool hasShownMessage2 = false;
@@ -103,6 +118,7 @@ public class DoorPassword : MonoBehaviour
     public bool hasShownMessage4 = false;
     public bool hasShownMessage5 = false;
     public bool hasShownMessage6 = false;
+    public bool hasShownMessage7 = false;
     void Start()
     {
 
@@ -116,6 +132,7 @@ public class DoorPassword : MonoBehaviour
         Door4PassWord();
         Door5PassWord();
         Door6PassWord();
+        Door7PassWord();
     }
     private void Door1PassWord()
     {
@@ -253,6 +270,34 @@ public class DoorPassword : MonoBehaviour
         else
         {
             door.Solve6 = false;
+        }
+    }
+
+    private void Door7PassWord()
+    {
+
+        int R7num1 = int.Parse(Room7text1.text);
+        int R7num2 = int.Parse(Room7text2.text);
+        int R7num3 = int.Parse(Room7text3.text);
+        if (R7num1 == R7answer1 && R7num2 == R7answer2 && R7num3 == R7answer3)
+
+        {
+            playerController.SetCanMove(true);
+            door.Solve7 = true;
+            Room7_DoorQ.SetActive(false);
+            door.Show7 = false;
+            Text_UI.SetActive(true);
+            Crosshair.SetActive(true);
+            if (!hasShownMessage6)
+            {
+                SoundManager.instance.PlaySE("doorUnlock");
+                GuideTextManager.Instance.ShowMessage("6번방 안내메세지");
+                hasShownMessage6 = true;
+            }
+        }
+        else
+        {
+            door.Solve7 = false;
         }
     }
 }

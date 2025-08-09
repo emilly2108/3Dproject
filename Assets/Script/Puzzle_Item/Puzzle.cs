@@ -23,43 +23,56 @@ public class Puzzle : MonoBehaviour
 
     [SerializeField]
     private GameObject puzzle_UI;
+    [SerializeField]
+    private GameObject chalk;
 
     public bool Showing = false;
+    private bool Show1 = false;
+    private bool Show2 = false;
+    private bool Show3 = false;
+    private bool Show4 = false;
+    private bool chalkPlayed = false;
+
     private bool FullPuzzle = false;
     public Monitor monitor;
     public PlayerController playerController;
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         TryPuzzle();
+        ShowPassword();
     }
 
     public void Puzzle1()
     {
         puzzle1.SetActive(true);
         puzzle1_UI.SetActive(true);
+        Show1 = true;
     }
     public void Puzzle2()
     {
         puzzle2.SetActive(true);
         puzzle2_UI.SetActive(true);
+        Show2 = true;
     }
     public void Puzzle3()
     {
         puzzle3.SetActive(true);
         puzzle3_UI.SetActive(true);
+        Show3 = true;
     }
     public void Puzzle4()
     {
         puzzle4.SetActive(true);
         puzzle4_UI.SetActive(true);
+        Show4 = true;
     }
 
-    private void  TryPuzzle()
+    private void TryPuzzle()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
@@ -75,7 +88,7 @@ public class Puzzle : MonoBehaviour
                     monitor.Text_UI.SetActive(false);
                     monitor.Crosshair.SetActive(false);
                     Showing = true;
-                    
+
                 }
                 else if (Showing == true)
                 {
@@ -89,5 +102,15 @@ public class Puzzle : MonoBehaviour
                     }
                 }
             }
+    }
+
+    private void ShowPassword()
+    {
+        if (Show1 == true && Show2 == true && Show3 == true && Show4 == true && chalkPlayed == false)
+        {
+            SoundManager.instance.PlaySE("chalk");
+            chalk.SetActive(true);
+            chalkPlayed = true;
+        }
     }
 }

@@ -47,6 +47,15 @@ public class Box_DoorPassword : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Box_Door4text4;
 
+    [SerializeField]
+    private TextMeshProUGUI Box_Door5text1;
+    [SerializeField]
+    private TextMeshProUGUI Box_Door5text2;
+    [SerializeField]
+    private TextMeshProUGUI Box_Door5text3;
+    [SerializeField]
+    private TextMeshProUGUI Box_Door5text4;
+
     //room1의 자물쇠의 정답
     private int B1answer1 = 3;
     private int B1answer2 = 8;
@@ -72,6 +81,11 @@ public class Box_DoorPassword : MonoBehaviour
     private int B4answer3 = 2;
     private int B4answer4 = 3;
 
+    //room3의 자물쇠의 정답
+    private string B5answer1 = "V";
+    private string B5answer2 = "A";
+    private string B5answer3 = "L";
+    private string B5answer4 = "E";
 
     // 문 퀴즈 오브젝트 입력
     [SerializeField]
@@ -82,7 +96,8 @@ public class Box_DoorPassword : MonoBehaviour
     private GameObject BoxDoor3_DoorQ;
     [SerializeField]
     private GameObject BoxDoor4_DoorQ;
-
+    [SerializeField]
+    private GameObject BoxDoor5_DoorQ;
 
 
     void Start()
@@ -97,6 +112,7 @@ public class Box_DoorPassword : MonoBehaviour
         Box_Door2PassWord();
         Box_Door3PassWord();
         Box_Door4PassWord();
+        Box_Door5PassWord();
     }
     private void Box_Door1PassWord()
     {
@@ -184,5 +200,24 @@ public class Box_DoorPassword : MonoBehaviour
         }
     }
 
-    
+    private void Box_Door5PassWord()
+    {
+        string B5str1 = (Box_Door5text1.text);
+        string B5str2 = (Box_Door5text2.text);
+        string B5str3 = (Box_Door5text3.text);
+        string B5str4 = (Box_Door5text4.text);
+        if (B5str1 == B5answer1 && B5str2 == B5answer2 && B5str3 == B5answer3 && B5str4 == B5answer4)
+        {
+            playerController.SetCanMove(true);
+            Box_door.Solve[4] = true;
+            BoxDoor5_DoorQ.SetActive(false);
+            Box_door.Show[4] = false;
+            Text_UI.SetActive(true);
+            Crosshair.SetActive(true);
+        }
+        else
+        {
+            Box_door.Solve[4] = false;
+        }
+    }
 }
