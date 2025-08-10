@@ -83,7 +83,11 @@ public class Puzzle : MonoBehaviour
                 monitor.TextUI.text = "퍼즐을 맞추려면 (Z)키를 누르세요";
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    playerController.SetCanMove(false);
+                    if (playerController.isMoveable == true)
+                    {
+                        playerController.LockMovement();
+                        playerController.isMoveable = false;
+                    }
                     puzzle_UI.SetActive(true);
                     monitor.Text_UI.SetActive(false);
                     monitor.Crosshair.SetActive(false);
@@ -94,7 +98,11 @@ public class Puzzle : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.R))
                     {
-                        playerController.SetCanMove(true);
+                        if (playerController.isMoveable == false)
+                        {
+                            playerController.UnlockMovement();
+                            playerController.isMoveable = true;
+                        }
                         puzzle_UI.SetActive(false);
                         Showing = false;
                         monitor.Text_UI.SetActive(true);

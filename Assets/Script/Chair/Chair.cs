@@ -103,7 +103,11 @@ public class Chair : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Z) && !isShowing)
             {
-                playerController.SetCanMove(false);
+                if (playerController.isMoveable == true)
+                {
+                    playerController.LockMovement();
+                    playerController.isMoveable = false;
+                }
                 ChairObject.SetActive(true);
                 isShowing = true;
                 Text_UI.SetActive(false);
@@ -111,7 +115,11 @@ public class Chair : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.R) && isShowing)
             {
-                playerController.SetCanMove(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
                 ChairObject.SetActive(false);
                 isShowing = false;
                 Text_UI.SetActive(true);

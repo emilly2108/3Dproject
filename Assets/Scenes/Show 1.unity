@@ -53685,6 +53685,7 @@ MonoBehaviour:
   runSpeed: 10
   crouchSpeed: 1.5
   jumpForce: 5
+  isMoveable: 1
   crouchPosY: 1
   lookSensitivity: 2
   cameraRotationLimit: 45
@@ -53801,7 +53802,7 @@ Transform:
   m_GameObject: {fileID: 1555731772}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.022755675, z: -0, w: 0.99974114}
-  m_LocalPosition: {x: 30.09, y: 1.054, z: -10.36}
+  m_LocalPosition: {x: -4.55, y: 1.054, z: -10.36}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:

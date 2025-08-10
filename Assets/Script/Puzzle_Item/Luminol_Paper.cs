@@ -35,7 +35,11 @@ public class Luminol_Paper : MonoBehaviour
                 {
                     if (Clear_Paper == false)
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == true)
+                        {
+                            playerController.LockMovement();
+                            playerController.isMoveable = false;
+                        }
                         before.SetActive(true);
                         Paper_before = true;
                         monitor.Text_UI.SetActive(false);
@@ -44,7 +48,11 @@ public class Luminol_Paper : MonoBehaviour
                     }
                     else if (Clear_Paper == true)
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == true)
+                        {
+                            playerController.LockMovement();
+                            playerController.isMoveable = false;
+                        }
                         after.SetActive(true);
                         Paper_after = true;
                         monitor.Text_UI.SetActive(false);
@@ -55,7 +63,11 @@ public class Luminol_Paper : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.R))
                     {
-                        playerController.SetCanMove(true);
+                        if (playerController.isMoveable == false)
+                        {
+                            playerController.UnlockMovement();
+                            playerController.isMoveable = true;
+                        }
                         before.SetActive(false);
                         after.SetActive(false);
                         Paper_before = false;
@@ -70,7 +82,7 @@ public class Luminol_Paper : MonoBehaviour
     {
         if (Paper_before == true)
         {
-            before.SetActive(false);
+            playerController.LockMovement();
             Paper_before = false;
             after.SetActive(true);
             Paper_after = true;
