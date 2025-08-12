@@ -208,6 +208,7 @@ public class Door : MonoBehaviour
                 playerController.SetCanMove(false);
                 if (!isSolved)
                 {
+                    playerController.SetCanMove(false);
                     quizUI.SetActive(true);
                     isShow = true;
                     Text_UI.SetActive(false);
@@ -240,6 +241,7 @@ public class Door : MonoBehaviour
             TextUI.text = "문을 열려면 (Z)키를 누르세요";
             if (Input.GetKeyDown(KeyCode.Z))
             {
+
                 door.StartCoroutine(door.DoorMoveOpen());
                 isOpen = true;
             }

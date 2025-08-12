@@ -21,6 +21,7 @@ public class OpenDoor : MonoBehaviour
     public System.Collections.IEnumerator DoorMoveOpen()
     {
         float elapsedTime = 0f;
+        SoundManager.instance.PlaySE("door");
         while (elapsedTime < moveDuration)
         {
             doorHinge.rotation = Quaternion.Lerp(closedRotation, openRotation, elapsedTime / moveDuration);
@@ -34,6 +35,7 @@ public class OpenDoor : MonoBehaviour
     public System.Collections.IEnumerator DoorMoveClose()
     {
         float elapsedTime = 0f;
+        SoundManager.instance.PlaySE("door");
         while (elapsedTime < moveDuration)
         {
             doorHinge.rotation = Quaternion.Lerp(openRotation,closedRotation,  elapsedTime / moveDuration);

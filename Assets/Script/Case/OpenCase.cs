@@ -7,6 +7,8 @@ public class OpenCase : MonoBehaviour
 
     public System.Collections.IEnumerator CaseOpen()
     {
+        Debug.Log("¿­¸²");
+        SoundManager.instance.PlaySE("case");
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + -transform.forward * moveDistance;
 
@@ -24,6 +26,8 @@ public class OpenCase : MonoBehaviour
 
     public System.Collections.IEnumerator CaseClose()
     {
+        Debug.Log("´ÝÈû");
+        SoundManager.instance.PlaySE("case");
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + transform.forward * moveDistance;
 
