@@ -8,9 +8,11 @@ public class Sound
     public string name;
     public AudioClip clip;
 }
+
 public class SoundManager : MonoBehaviour
 {
-    static public SoundManager instance;
+    public static SoundManager instance;
+
     #region singleton
     void Awake()
     {
@@ -19,23 +21,64 @@ public class SoundManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
         else
             Destroy(gameObject);
     }
     #endregion singleton
+
     public AudioSource audioSourceBgm;
     public AudioSource[] audioSourceEffects;
-    
 
     public string[] playSoundName;
 
     public Sound[] effectSounds;
     public Sound[] bgmSounds;
 
+    [SerializeField, Range(0f, 1f)]
+    private float bgmMasterVolume = 1f; // 기본 100%
+    [SerializeField, Range(0f, 1f)]
+    private float seMasterVolume = 1f;  // 기본 100%
+
+    public float BGM_masterVolume
+    {
+        get => bgmMasterVolume;
+        set
+        {
+            bgmMasterVolume = Mathf.Clamp01(value);
+            ApplyBGMVolume();
+        }
+    }
+
+    public float SE_masterVolume
+    {
+        get => seMasterVolume;
+        set
+        {
+            seMasterVolume = Mathf.Clamp01(value);
+            ApplySEVolume();
+        }
+    }
+
     void Start()
     {
         playSoundName = new string[audioSourceEffects.Length];
+        ApplyBGMVolume();
+        ApplySEVolume();
+    }
+
+    private void ApplyBGMVolume()
+    {
+        if (audioSourceBgm != null)
+            audioSourceBgm.volume = 1f * bgmMasterVolume;
+    }
+
+    private void ApplySEVolume()
+    {
+        foreach (var se in audioSourceEffects)
+        {
+            if (se != null)
+                se.volume = 1f * seMasterVolume;
+        }
     }
 
     public void PlaySE(string _name)
@@ -54,11 +97,11 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 가용 AudioSource사용중");
+                Debug.Log("모든 가용 AudioSource 사용중");
                 return;
             }
         }
-        Debug.Log(_name + "사운드가 SoundManager에 등록안됨");
+        Debug.Log(_name + " 사운드가 SoundManager에 등록안됨");
     }
 
     public void StopAllSE()
@@ -76,12 +119,12 @@ public class SoundManager : MonoBehaviour
             if (playSoundName[i] == _name)
             {
                 audioSourceEffects[i].Stop();
-                break;
+                return;
             }
         }
-        Debug.Log("재생 중인" + _name + "사운드가 없습니다");
+        Debug.Log("재생 중인 " + _name + " 사운드가 없습니다");
     }
-    // BGM 재생 (이름으로 찾아서 재생)
+
     public void PlayBGM(string _name, bool loop = true)
     {
         for (int i = 0; i < bgmSounds.Length; i++)
@@ -89,39 +132,33 @@ public class SoundManager : MonoBehaviour
             if (bgmSounds[i].name == _name)
             {
                 if (audioSourceBgm.clip == bgmSounds[i].clip && audioSourceBgm.isPlaying)
-                {
-                    // 이미 같은 BGM이 재생중이면 그냥 리턴
                     return;
-                }
+
                 audioSourceBgm.clip = bgmSounds[i].clip;
                 audioSourceBgm.loop = loop;
                 audioSourceBgm.Play();
+                ApplyBGMVolume();
                 return;
             }
         }
         Debug.LogWarning(_name + " BGM이 SoundManager에 등록되어 있지 않습니다.");
     }
 
-    // BGM 정지
     public void StopBGM()
     {
         if (audioSourceBgm.isPlaying)
             audioSourceBgm.Stop();
     }
 
-    // BGM 일시정지
     public void PauseBGM()
     {
         if (audioSourceBgm.isPlaying)
             audioSourceBgm.Pause();
     }
 
-    // BGM 다시 재생 (일시정지 후)
     public void ResumeBGM()
     {
         if (audioSourceBgm.clip != null && !audioSourceBgm.isPlaying)
             audioSourceBgm.Play();
     }
 }
-
-

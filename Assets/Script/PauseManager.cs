@@ -5,6 +5,7 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] PlayerController playerController;
+    [SerializeField] private GameObject settingsUI;
     private bool isPaused = false;
 
     private void Update()
@@ -33,7 +34,16 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseUI.SetActive(false);
     }
+    public void OpenSettingsUI()
+    {
+        settingsUI.SetActive(true);
 
+    }
+    public void CloseSettingsUI()
+    {
+        settingsUI.SetActive(false);
+
+    }
     public void GoToStartScene()
     {
         playerController.SetCanMove(true);  // 이동 허용
