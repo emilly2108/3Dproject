@@ -6,22 +6,27 @@ public class StartMenuManager : MonoBehaviour
 
     private void Start()
     {
-        
-        settingsUI.SetActive(false);
+        if (settingsUI != null)
+            settingsUI.SetActive(false);
     }
-
+    public void LoadStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
     public void LoadShow1Scene()
     {
         SceneManager.LoadScene("Show 1");
     }
+
     public void OpenSettingsUI()
     {
-        settingsUI.SetActive(true);
-
+        if (settingsUI != null)
+            settingsUI.SetActive(true);
     }
+
     public void CloseSettingsUI()
     {
-        settingsUI.SetActive(false);
-
+        if (settingsUI != null)
+            settingsUI.SetActive(false);
     }
 }

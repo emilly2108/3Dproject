@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class LifeSystem : MonoBehaviour
 {
@@ -16,6 +18,11 @@ public class LifeSystem : MonoBehaviour
     [SerializeField] private GameObject holeObject;
     [SerializeField] private GameObject monster;
     [SerializeField] private MonsterChaser monsterChaser;
+
+ 
+ 
+
+
 
     private void Start()
     {
@@ -33,7 +40,7 @@ public class LifeSystem : MonoBehaviour
         if (currentHP == 0)
         {
             Debug.Log("Game Over");
-            // 게임 오버 로직 추가 가능
+            StartCoroutine(GameOverSequence());
         }
     }
 
@@ -107,4 +114,13 @@ public class LifeSystem : MonoBehaviour
         }
         fadeImage.color = new Color(color.r, color.g, color.b, 0f);
     }
+    private IEnumerator GameOverSequence()
+    {
+       
+        yield return StartCoroutine(FadeOut());
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("GameOver");
+
+    }
+
 }
