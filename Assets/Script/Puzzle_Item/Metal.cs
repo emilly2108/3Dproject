@@ -35,7 +35,11 @@ public class Metal : MonoBehaviour
                 {
                     if (Clear == false)
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == true)
+                        {
+                            playerController.LockMovement();
+                            playerController.isMoveable = false;
+                        }
                         before.SetActive(true);
                         Show_before = true;
                         monitor.Text_UI.SetActive(false);
@@ -44,7 +48,11 @@ public class Metal : MonoBehaviour
                     }
                     else if(Clear == true)
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == false)
+                        {
+                            playerController.UnlockMovement();
+                            playerController.isMoveable = true;
+                        }
                         after.SetActive(true);
                         Show_after = true;
                         monitor.Text_UI.SetActive(false);
@@ -55,7 +63,11 @@ public class Metal : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.R))
                     {
-                        playerController.SetCanMove(true);
+                        if (playerController.isMoveable == false)
+                        {
+                            playerController.UnlockMovement();
+                            playerController.isMoveable = true;
+                        }
                         before.SetActive(false);
                         after.SetActive(false);
                         Show_before = false;

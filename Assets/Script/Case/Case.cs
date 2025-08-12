@@ -80,17 +80,25 @@ public class Case : MonoBehaviour
             {
                 if (!Solve[index])
                 {
-                    playerController.SetCanMove(false);
                     cases[index].SetActive(true);
                     Showing[index] = true;
                     Text_UI.SetActive(false);
                     Crosshair.SetActive(false);
+                    if(playerController.isMoveable == true)
+                    {
+                        playerController.LockMovement();
+                        playerController.isMoveable = false;
+                    }
                 }
                 else
                 {
                     openCases[index].StartCoroutine(openCases[index].CaseOpen());
                     opening[index] = true;
-                    playerController.SetCanMove(true);
+                    if (playerController.isMoveable == false)
+                    {
+                        playerController.UnlockMovement();
+                        playerController.isMoveable = true;
+                    }
                 }
             }
         }
@@ -100,7 +108,13 @@ public class Case : MonoBehaviour
             {
                 openCases[index].StartCoroutine(openCases[index].CaseClose());
                 opening[index] = false;
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
             }
+            
         }
     }
 
@@ -117,7 +131,7 @@ public class Case : MonoBehaviour
 
     void CloseCase(int index)
     {
-        playerController.SetCanMove(true);
+        playerController.UnlockMovement();
         cases[index].SetActive(false);
         Showing[index] = false;
         Text_UI.SetActive(true);

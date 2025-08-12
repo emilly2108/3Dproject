@@ -75,9 +75,14 @@ public class Box_Door : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
+
                 if (!Solve[index])
                 {
-                    playerController.SetCanMove(false);
+                    if (playerController.isMoveable == true)
+                    {
+                        playerController.LockMovement();
+                        playerController.isMoveable = false;
+                    }
                     Box_Doors[index].SetActive(true);
                     Show[index] = true;
                     Text_UI.SetActive(false);
@@ -87,7 +92,11 @@ public class Box_Door : MonoBehaviour
                 {
                     openBox_Door[index].StartCoroutine(openBox_Door[index].DoorMoveOpen());
                     opening[index] = true;
-                    playerController.SetCanMove(true);
+                    if (playerController.isMoveable == false)
+                    {
+                        playerController.UnlockMovement();
+                        playerController.isMoveable = true;
+                    }
                 }
             }
         }
