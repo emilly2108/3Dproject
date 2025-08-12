@@ -193,190 +193,260 @@ public class CasePassWord : MonoBehaviour
 
     private void R1Case1PassWord()
     {
-        int R1num1 = int.Parse(Case1text1.text);
-        int R1num2 = int.Parse(Case1text2.text);
-        int R1num3 = int.Parse(Case1text3.text);
-        if (R1num1 == C1_answer1 && R1num2 == C1_answer2 && R1num3 == C1_answer3)
+        if(Case.Showing[0] == true)
         {
-            Case.Solve[0] = true;
-            Room1_Case1.SetActive(false);
-            Case.Showing[0] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            int R1num1 = int.Parse(Case1text1.text);
+            int R1num2 = int.Parse(Case1text2.text);
+            int R1num3 = int.Parse(Case1text3.text);
+            if (R1num1 == C1_answer1 && R1num2 == C1_answer2 && R1num3 == C1_answer3)
+            {
+                Case.Solve[0] = true;
+                Room1_Case1.SetActive(false);
+                Case.Showing[0] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[0] = false;
+            }
         }
-        else
-        {
-            Case.Solve[0] = false;
-        }
+        
     }
 
     private void R1Case2PassWord()
     {
-        string R1text1 = Case2text1.text;
-        string R1text2 = Case2text2.text;
-        string R1text3 = Case2text3.text;
-        string R1text4 = Case2text4.text;
-        if (R1text1 == C2_answer1 && R1text2 == C2_answer2 && R1text3 == C2_answer3 && R1text4 == C2_answer4)
+        if (Case.Showing[1] == true)
         {
-            Case.Solve[1] = true;
-            Room1_Case2.SetActive(false);
-            Case.Showing[1] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            string R1text1 = Case2text1.text;
+            string R1text2 = Case2text2.text;
+            string R1text3 = Case2text3.text;
+            string R1text4 = Case2text4.text;
+            if (R1text1 == C2_answer1 && R1text2 == C2_answer2 && R1text3 == C2_answer3 && R1text4 == C2_answer4)
+            {
+                Case.Solve[1] = true;
+                Room1_Case2.SetActive(false);
+                Case.Showing[1] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[1] = false;
+            }
         }
-        else
-        {
-            Case.Solve[1] = false;
-        }
+        
     }
 
     private void R3Case1PassWord()
     {
-        string R3text1 = Case3text1.text;
-        string R3text2 = Case3text2.text;
-        string R3text3 = Case3text3.text;
-        string R3text4 = Case3text4.text;
-        if (R3text1 == C3_answer1 && R3text2 == C3_answer2 && R3text3 == C3_answer3 && R3text4 == C3_answer4)
+        if(Case.Showing[2] == true)
         {
-            Case.Solve[2] = true;
-            Room3_Case1.SetActive(false);
-            Case.Showing[2] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            string R3text1 = Case3text1.text;
+            string R3text2 = Case3text2.text;
+            string R3text3 = Case3text3.text;
+            string R3text4 = Case3text4.text;
+            if (R3text1 == C3_answer1 && R3text2 == C3_answer2 && R3text3 == C3_answer3 && R3text4 == C3_answer4)
+            {
+                Case.Solve[2] = true;
+                Room3_Case1.SetActive(false);
+                Case.Showing[2] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[2] = false;
+            }
         }
-        else
-        {
-            Case.Solve[2] = false;
-        }
+        
     }
     private void R3Case2PassWord()
     {
-        int R3num1 = int.Parse(Case4text1.text);
-        int R3num2 = int.Parse(Case4text2.text);
-        int R3num3 = int.Parse(Case4text3.text);
-        if (R3num1 == C4_answer1 && R3num2 == C4_answer2 && R3num3 == C4_answer3)
+        if(Case.Showing[3] == true)
         {
-            Case.Solve[3] = true;
-            Room3_Case2.SetActive(false);
-            Case.Showing[3] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            int R3num1 = int.Parse(Case4text1.text);
+            int R3num2 = int.Parse(Case4text2.text);
+            int R3num3 = int.Parse(Case4text3.text);
+            if (R3num1 == C4_answer1 && R3num2 == C4_answer2 && R3num3 == C4_answer3)
+            {
+                Case.Solve[3] = true;
+                Room3_Case2.SetActive(false);
+                Case.Showing[3] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[3] = false;
+            }
         }
-        else
-        {
-            Case.Solve[3] = false;
-        }
+        
     }
 
     private void R3Case3PassWord()
     {
-        int R3_2num1 = int.Parse(Case5text1.text);
-        int R3_2num2 = int.Parse(Case5text2.text);
-        int R3_2num3 = int.Parse(Case5text3.text);
-        int R3_2num4 = int.Parse(Case5text4.text);
-        if (R3_2num1 == C5_answer1 && R3_2num2 == C5_answer2 && R3_2num3 == C5_answer3 && R3_2num4 == C5_answer4)
+        if (Case.Showing[4] == true)
         {
-            Case.Solve[4] = true;
-            Room3_Case3.SetActive(false);
-            Case.Showing[4] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
-        }
-        else
-        {
-            Case.Solve[4] = false;
+            int R3_2num1 = int.Parse(Case5text1.text);
+            int R3_2num2 = int.Parse(Case5text2.text);
+            int R3_2num3 = int.Parse(Case5text3.text);
+            int R3_2num4 = int.Parse(Case5text4.text);
+            if (R3_2num1 == C5_answer1 && R3_2num2 == C5_answer2 && R3_2num3 == C5_answer3 && R3_2num4 == C5_answer4)
+            {
+                Case.Solve[4] = true;
+                Room3_Case3.SetActive(false);
+                Case.Showing[4] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[4] = false;
+            }
         }
     }
 
     private void R5Case1PassWord()
     {
-        int R5num1 = int.Parse(Case6text1.text);
-        int R5num2 = int.Parse(Case6text2.text);
-        int R5num3 = int.Parse(Case6text3.text);
-        if (R5num1 == C6_answer1 && R5num2 == C6_answer2 && R5num3 == C6_answer3)
+        if (Case.Showing[5] == true)
         {
-            Case.Solve[5] = true;
-            Room5_Case1.SetActive(false);
-            Case.Showing[5] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            int R5num1 = int.Parse(Case6text1.text);
+            int R5num2 = int.Parse(Case6text2.text);
+            int R5num3 = int.Parse(Case6text3.text);
+            if (R5num1 == C6_answer1 && R5num2 == C6_answer2 && R5num3 == C6_answer3)
+            {
+                Case.Solve[5] = true;
+                Room5_Case1.SetActive(false);
+                Case.Showing[5] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+            }
+            else
+            {
+                Case.Solve[5] = false;
+            }
         }
-        else
-        {
-            Case.Solve[5] = false;
-        }
+            
     }
 
     private void R5Case2PassWord()
     {
-        string R5text1 = Case7text1.text;
-        string R5text2 = Case7text2.text;
-        string R5text3 = Case7text3.text;
-        string R5text4 = Case7text4.text;
-        if (R5text1 == C7_answer1 && R5text2 == C7_answer2 && R5text3 == C7_answer3 && R5text4 == C7_answer4)
+        if (Case.Showing[6] == true)
         {
-            Case.Solve[6] = true;
-            Room5_Case2.SetActive(false);
-            Case.Showing[6] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
-            Scenes1.SetActive(false);
-            Scenes2.SetActive(true);
-        }
-        else
-        {
-            Case.Solve[6] = false;
+            string R5text1 = Case7text1.text;
+            string R5text2 = Case7text2.text;
+            string R5text3 = Case7text3.text;
+            string R5text4 = Case7text4.text;
+            if (R5text1 == C7_answer1 && R5text2 == C7_answer2 && R5text3 == C7_answer3 && R5text4 == C7_answer4)
+            {
+                Case.Solve[6] = true;
+                Room5_Case2.SetActive(false);
+                Case.Showing[6] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+                Scenes1.SetActive(false);
+                Scenes2.SetActive(true);
+            }
+            else
+            {
+                Case.Solve[6] = false;
+            }
         }
     }
     private void R5Case3PassWord()
     {
-        string R5_1text1 = Case8text1.text;
-        string R5_1text2 = Case8text2.text;
-        string R5_1text3 = Case8text3.text;
-        string R5_1text4 = Case8text4.text;
-        if (R5_1text1 == C8_answer1 && R5_1text2 == C8_answer2 && R5_1text3 == C8_answer3 && R5_1text4 == C8_answer4)
+        if(Case.Showing[7] == true)
         {
-            Case.Solve[7] = true;
-            Room5_Case3.SetActive(false);
-            Case.Showing[7] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
-            Scenes2.SetActive(false);
-            Scenes3.SetActive(true);
+            string R5_1text1 = Case8text1.text;
+            string R5_1text2 = Case8text2.text;
+            string R5_1text3 = Case8text3.text;
+            string R5_1text4 = Case8text4.text;
+            if (R5_1text1 == C8_answer1 && R5_1text2 == C8_answer2 && R5_1text3 == C8_answer3 && R5_1text4 == C8_answer4)
+            {
+                Case.Solve[7] = true;
+                Room5_Case3.SetActive(false);
+                Case.Showing[7] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+                Scenes2.SetActive(false);
+                Scenes3.SetActive(true);
+            }
+            else
+            {
+                Case.Solve[7] = false;
+            }
         }
-        else
-        {
-            Case.Solve[7] = false;
-        }
+        
     }
 
     private void R5Case4PassWord()
     {
-        int R5_1num1 = int.Parse(Case9text1.text);
-        int R5_1num2 = int.Parse(Case9text2.text);
-        int R5_1num3 = int.Parse(Case9text3.text);
-        if (R5_1num1 == C9_answer1 && R5_1num2 == C9_answer2 && R5_1num3 == C9_answer3)
+        if (Case.Showing[8] == true)
         {
-            Case.Solve[8] = true;
-            Room5_Case4.SetActive(false);
-            Case.Showing[8] = false;
-            Text_UI.SetActive(true);
-            Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
-            Scenes3.SetActive(false);
-            Scenes4.SetActive(true);
+            int R5_1num1 = int.Parse(Case9text1.text);
+            int R5_1num2 = int.Parse(Case9text2.text);
+            int R5_1num3 = int.Parse(Case9text3.text);
+            if (R5_1num1 == C9_answer1 && R5_1num2 == C9_answer2 && R5_1num3 == C9_answer3)
+            {
+                Case.Solve[8] = true;
+                Room5_Case4.SetActive(false);
+                Case.Showing[8] = false;
+                Text_UI.SetActive(true);
+                Crosshair.SetActive(true);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
+                Scenes3.SetActive(false);
+                Scenes4.SetActive(true);
+            }
+            else
+            {
+                Case.Solve[8] = false;
+            }
         }
-        else
-        {
-            Case.Solve[8] = false;
-        }
+            
     }
 }

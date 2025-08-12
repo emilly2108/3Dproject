@@ -195,7 +195,12 @@ public class Door : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    playerController.SetCanMove(true);
+                    if (playerController.isMoveable == false)
+                    {
+                        playerController.UnlockMovement();
+                        playerController.isMoveable = true;
+                        Debug.Log("움직임 해제");
+                    }
                     quizUI.SetActive(false);
                     isShow = false;
                     Text_UI.SetActive(true);
@@ -205,10 +210,18 @@ public class Door : MonoBehaviour
             TextUI.text = "문을 열려면 (Z)키를 누르세요";
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                playerController.SetCanMove(false);
+                if (playerController.isMoveable == false)
+                {
+                    playerController.UnlockMovement();
+                    playerController.isMoveable = true;
+                }
                 if (!isSolved)
                 {
-                    playerController.SetCanMove(false);
+                    if (playerController.isMoveable == true)
+                    {
+                        playerController.LockMovement();
+                        playerController.isMoveable = false;
+                    }
                     quizUI.SetActive(true);
                     isShow = true;
                     Text_UI.SetActive(false);
@@ -216,7 +229,11 @@ public class Door : MonoBehaviour
                 }
                 else
                 {
-                    playerController.SetCanMove(true);
+                    if (playerController.isMoveable == false)
+                    {
+                        playerController.UnlockMovement();
+                        playerController.isMoveable = true;
+                    }
                     door.StartCoroutine(door.DoorMoveOpen());
                     isOpen = true;
                 }

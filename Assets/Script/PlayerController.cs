@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
 
     // 움직임 가능?
-    private bool isMoveable = true;
+    public bool isMoveable = true;
+    private int moveLockCount = 0; //오류 감지용
 
 
     private bool isWalk = false;
@@ -229,7 +230,7 @@ public class PlayerController : MonoBehaviour
         return isGround;
     }
     // 스피드 아이템 사용
-    public void StartSpeedBoost(float duration) // 스피드 증가 아이템 호출용(IEnumerator는 직접 호출 불가)
+    public void StartSpeedBoost(float duration)
     {
         StartCoroutine(SpeedCoroutine(duration));
     }
@@ -243,5 +244,19 @@ public class PlayerController : MonoBehaviour
             applySpeed = runSpeed;
         else
             applySpeed = walkSpeed;
+    }
+
+    public void LockMovement()
+    {
+        moveLockCount++;
+        isMoveable = false;
+    }
+
+    public void UnlockMovement()
+    {
+        moveLockCount--;
+        if (moveLockCount == 0)
+        { isMoveable = true; }
+            
     }
 }

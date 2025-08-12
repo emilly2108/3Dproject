@@ -57,7 +57,11 @@ public class Monitor : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == true)
+                        {
+                            playerController.LockMovement();
+                            playerController.isMoveable = false;
+                        }
                         Text_UI.SetActive(false);
                         Crosshair.SetActive(false);
                         Room1MQ.SetActive(true);
@@ -67,7 +71,11 @@ public class Monitor : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.R))
                         {
-                            playerController.SetCanMove(true);
+                            if (playerController.isMoveable == false)
+                            {
+                                playerController.UnlockMovement();
+                                playerController.isMoveable = true;
+                            }
                             Text_UI.SetActive(true);
                             Crosshair.SetActive(true);
                             Room1MQ.SetActive(false);
@@ -81,7 +89,11 @@ public class Monitor : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
-                        playerController.SetCanMove(false);
+                        if (playerController.isMoveable == true)
+                        {
+                            playerController.LockMovement();
+                            playerController.isMoveable = false;
+                        }
                         Text_UI.SetActive(false);
                         Crosshair.SetActive(false);
                         Room3MQ.SetActive(true);
@@ -91,7 +103,11 @@ public class Monitor : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.R))
                         {
-                            playerController.SetCanMove(true);
+                            if (playerController.isMoveable == false)
+                            {
+                                playerController.UnlockMovement();
+                                playerController.isMoveable = true;
+                            }
                             Text_UI.SetActive(true);
                             Crosshair.SetActive(true);
                             Room3MQ.SetActive(false);
@@ -113,7 +129,10 @@ public class Monitor : MonoBehaviour
         IsTouch = Physics.Raycast(ray, out hit, 1.5f);
         if (IsTouch)
         {
-            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Item") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Metal") && !hit.transform.CompareTag("Chair") && !hit.transform.CompareTag("Puzzle") && !hit.transform.CompareTag("MorgueBox_Door") && !hit.transform.CompareTag("Luminol_Paper"))
+            if (!hit.transform.CompareTag("PC") && !hit.transform.CompareTag("Door") && !hit.transform.CompareTag("Paper") && !hit.transform.CompareTag("Case") 
+                && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Item") && !hit.transform.CompareTag("Case") && !hit.transform.CompareTag("Metal") 
+                && !hit.transform.CompareTag("Chair") && !hit.transform.CompareTag("Puzzle") && !hit.transform.CompareTag("MorgueBox_Door") && !hit.transform.CompareTag("Luminol_Paper")
+                && !hit.transform.CompareTag("MainDoor"))
             {
                 TextUI.text = " ";
             }

@@ -58,7 +58,11 @@ public class Paper : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && !Showing[index])
         {
             SoundManager.instance.PlaySE("paper");
-            playerController.SetCanMove(false);
+            if (playerController.isMoveable == true)
+            {
+                playerController.LockMovement();
+                playerController.isMoveable = false;
+            }
             paper[index].SetActive(true);
             Showing[index] = true;
             Text_UI.SetActive(false);
@@ -67,7 +71,11 @@ public class Paper : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.R) && Showing[index])
         {
             SoundManager.instance.PlaySE("paper");
-            playerController.SetCanMove(true);
+            if (playerController.isMoveable == false)
+            {
+                playerController.UnlockMovement();
+                playerController.isMoveable = true;
+            }
             paper[index].SetActive(false);
             Showing[index] = false;
             Text_UI.SetActive(true);

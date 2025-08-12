@@ -69,7 +69,11 @@ public class ChairPuzzle : MonoBehaviour
             Chair.ChairSolveing = true;
             Text_UI.SetActive(true);
             Crosshair.SetActive(true);
-            playerController.SetCanMove(true);
+            if (playerController.isMoveable == false)
+            {
+                playerController.UnlockMovement();
+                playerController.isMoveable = true;
+            }
             chair1.SetActive(false);
             chair2.SetActive(false);
             chair3.SetActive(false);
