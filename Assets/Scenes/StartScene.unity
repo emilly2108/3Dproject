@@ -153,6 +153,7 @@ RectTransform:
   - {fileID: 1594476437}
   - {fileID: 1956537740}
   - {fileID: 1211259254}
+  - {fileID: 1702379708}
   m_Father: {fileID: 1238820137}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -824,7 +825,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 95077618}
-  - {fileID: 4139906682828436059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1500,6 +1500,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
   - name: chaseBGM
     clip: {fileID: 8300000, guid: 82036eef5bc9e134b94e758874d8dc29, type: 3}
+  - name: startBGM
+    clip: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
+  - name: gameOverBGM
+    clip: {fileID: 8300000, guid: 1fdcd9821fb029846bb6ab7788eb2bdf, type: 3}
+  - name: endingBGM
+    clip: {fileID: 8300000, guid: df1d25fb7cafe0740a87f9c6953afc5e, type: 3}
+  - name: bonusBGM
+    clip: {fileID: 8300000, guid: 77d6ce3170bab084086e09fed8797259, type: 3}
   bgmMasterVolume: 1
   seMasterVolume: 1
 --- !u!82 &1507319591
@@ -1512,8 +1520,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
-  m_Resource: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
+  m_Resource: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1850,12 +1858,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702379706}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.40215707, y: 8.902507, z: -4.815971}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1920.4021, y: -1071.0975, z: -4.815971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
+  m_Children:
+  - {fileID: 4139906682828436059}
+  m_Father: {fileID: 95077618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1702379709
 MonoBehaviour:
@@ -2139,7 +2148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845050100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffa43d98df95a48469b0f48143030bb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d24b3bda3cdff641b770ed7da5661a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUI: {fileID: 3066610229214831353}
@@ -3450,8 +3459,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3066610229214831353}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.815971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3460,12 +3469,12 @@ RectTransform:
   - {fileID: 7047058910019809055}
   - {fileID: 4524620375052239416}
   - {fileID: 8448204512221954997}
-  m_Father: {fileID: 1238820137}
+  m_Father: {fileID: 1702379708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.6115723, y: -29.810425}
-  m_SizeDelta: {x: -1428.4663, y: -535.089}
+  m_AnchoredPosition: {x: 1925.0137, y: 1041.2871}
+  m_SizeDelta: {x: 2411.5337, y: 1624.911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &4143206442229307022
 RectTransform:
@@ -5049,5 +5058,4 @@ SceneRoots:
   - {fileID: 1238820137}
   - {fileID: 1461893549}
   - {fileID: 1845050101}
-  - {fileID: 1702379708}
   - {fileID: 1507319592}
