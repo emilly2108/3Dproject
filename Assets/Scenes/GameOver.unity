@@ -282,8 +282,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 661487169}
-        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
-        m_MethodName: LoadStartScene
+        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_MethodName: StartScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -451,10 +451,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 661487167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d24b3bda3cdff641b770ed7da5661a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 83ceabdadeec8fa4e9dcc45627635bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsUI: {fileID: 0}
 --- !u!1 &1151110747
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,8 +538,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 661487169}
-        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
-        m_MethodName: LoadShow1Scene
+        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_MethodName: Show1Scene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1500,6 +1500,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
   - name: chaseBGM
     clip: {fileID: 8300000, guid: 82036eef5bc9e134b94e758874d8dc29, type: 3}
+  - name: startBGM
+    clip: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
+  - name: gameOverBGM
+    clip: {fileID: 8300000, guid: 1fdcd9821fb029846bb6ab7788eb2bdf, type: 3}
+  - name: endingBGM
+    clip: {fileID: 8300000, guid: df1d25fb7cafe0740a87f9c6953afc5e, type: 3}
+  - name: bonusBGM
+    clip: {fileID: 8300000, guid: 77d6ce3170bab084086e09fed8797259, type: 3}
   bgmMasterVolume: 1
   seMasterVolume: 1
 --- !u!82 &1507319591
@@ -1512,8 +1520,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
-  m_Resource: {fileID: 8300000, guid: 7bfe53613dab3d4408ccbcb2e1dcfa47, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
+  m_Resource: {fileID: 8300000, guid: e9aecc5dfbb075540b57eca5f5908205, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
