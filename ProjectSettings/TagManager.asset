@@ -22,6 +22,7 @@ TagManager:
   - Luminol_Paper
   - MorgueBox_Door
   - MainDoor
+  - babyMonster
   layers:
   - Default
   - TransparentFX

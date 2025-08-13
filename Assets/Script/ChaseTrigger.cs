@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -7,25 +7,25 @@ public class ChaseTrigger : MonoBehaviour
     public MonsterChaser monster1;
     public MonsterChaser monster2;
     public GameObject chaseEndTrigger2;
-   
-    
 
+
+    //âœ…
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ChaseStart1"))
         {
             monster1.StartChase(transform);
-            GuideTextManager.Instance.ShowMessage("´©±º°¡ µû¶ó¿À°í ÀÖ´Ù..");
+            GuideTextManager.Instance.ShowMessage("ëˆ„êµ°ê°€ ë”°ë¼ì˜¤ê³  ìˆë‹¤. ì—¬ìí™”ì¥ì‹¤ë¡œ ë“¤ì–´ê°€ ìˆ¨ì–´ë³´ì.");
         }
         else if (other.CompareTag("ChaseEnd1"))
         {
             monster1.StopChase();
-            GuideTextManager.Instance.ShowMessage("Ãß°İÀÌ ¸ØÃá °Í °°´Ù.");
+            GuideTextManager.Instance.ShowMessage("ì¶”ê²©ì´ ë©ˆì¶˜ ê²ƒ ê°™ë‹¤..");
         }
         else if (other.CompareTag("ChaseStart2"))
         {
             monster2.StartChase(transform);
-            GuideTextManager.Instance.ShowMessage("´©±º°¡ µû¶ó¿À°í ÀÖ´Ù..");
+            GuideTextManager.Instance.ShowMessage("ëˆ„êµ°ê°€ ë”°ë¼ì˜¤ê³  ìˆë‹¤.. ì–´ë””ë¡ ê°€ ìˆ¨ì–´ì•¼ í•  ê²ƒ ê°™ë‹¤.");
 
       
             if (chaseEndTrigger2 != null)
@@ -34,7 +34,7 @@ public class ChaseTrigger : MonoBehaviour
         else if (other.CompareTag("ChaseEnd2"))
         {
             monster2.StopChase();
-            GuideTextManager.Instance.ShowMessage("Ãß°İÀÌ ¸ØÃá °Í °°´Ù.");
+            GuideTextManager.Instance.ShowMessage("ì¶”ê²©ì´ ë©ˆì¶˜ ê²ƒ ê°™ë‹¤.");
         }
     }
 

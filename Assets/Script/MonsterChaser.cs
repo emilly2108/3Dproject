@@ -10,7 +10,7 @@ public class MonsterChaser : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform target;
-    private bool isChasing = false;
+    public bool isChasing = false;
 
     private void Start()
     {
@@ -27,6 +27,7 @@ public class MonsterChaser : MonoBehaviour
 
     public void StartChase(Transform chaseTarget)
     {
+        
         SoundManager.instance.PlayBGM("chaseBGM");
         target = chaseTarget;
         isChasing = true;
