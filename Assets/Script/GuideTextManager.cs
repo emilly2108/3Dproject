@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class GuideTextManager : MonoBehaviour
-{
-    public static GuideTextManager Instance { get; private set; } // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+{//âœ…
+    public static GuideTextManager Instance { get; private set; } // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
 
     public Text descText;
 
-    // ÀÎ½ºÆåÅÍ¿¡¼­ ÀÔ·Â¹ŞÀ» ¹®ÀÚ¿­ ¸®½ºÆ®
+    // ì¸ìŠ¤í™í„°ì—ì„œ ì…ë ¥ë°›ì„ ë¬¸ìì—´ ë¦¬ìŠ¤íŠ¸
     [SerializeField]
-    private List<string> messages; // ¸Ş½ÃÁö ¸®½ºÆ®
+    private List<string> messages; // ë©”ì‹œì§€ ë¦¬ìŠ¤íŠ¸
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class GuideTextManager : MonoBehaviour
 
     private void Start()
     {
-        // ¾À ½ÃÀÛ ½Ã ¸Ş½ÃÁö¸¦ Â÷·Ê´ë·Î º¸¿©ÁÜ
+        // ì”¬ ì‹œì‘ ì‹œ ë©”ì‹œì§€ë¥¼ ì°¨ë¡€ëŒ€ë¡œ ë³´ì—¬ì¤Œ
         StartCoroutine(ShowMessagesSequentially());
     }
 
@@ -50,7 +50,7 @@ public class GuideTextManager : MonoBehaviour
         foreach (string message in messages)
         {
             ShowMessage(message);
-            yield return new WaitForSeconds(3f); // ¸Ş½ÃÁö°¡ º¸¿©Áö´Â ½Ã°£ µ¿¾È ´ë±â
+            yield return new WaitForSeconds(3f); // ë©”ì‹œì§€ê°€ ë³´ì—¬ì§€ëŠ” ì‹œê°„ ë™ì•ˆ ëŒ€ê¸°
         }
     }
 }

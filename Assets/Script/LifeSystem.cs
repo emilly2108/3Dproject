@@ -57,6 +57,8 @@ public class LifeSystem : MonoBehaviour
         if (other.CompareTag("Hole")|| other.CompareTag("Monster"))
         {
             Debug.Log("HP -1");
+            SoundManager.instance.PlaySE("womanScream");
+
             ChangeHP(-1);
             StartCoroutine(FadeSequence(holeObject,other)); 
         }
@@ -76,9 +78,10 @@ public class LifeSystem : MonoBehaviour
             transform.position = new Vector3(-21f, 1f, -16f);
             monsterChaser.PauseChase();
             monster.transform.position = new Vector3(-34f, -8f, -30f);
-            //monsterChaser.chaseStartTrigger.SetActive(true);
-        }
             
+        }
+
+
 
         yield return new WaitForSeconds(2f); 
         yield return StartCoroutine(FadeIn());
