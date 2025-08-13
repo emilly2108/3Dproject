@@ -57,6 +57,8 @@ public class LifeSystem : MonoBehaviour
         if (other.CompareTag("Hole")|| other.CompareTag("Monster"))
         {
             Debug.Log("HP -1");
+            SoundManager.instance.PlaySE("womanScream");
+
             ChangeHP(-1);
             StartCoroutine(FadeSequence(holeObject,other)); 
         }
