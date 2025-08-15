@@ -17378,6 +17378,7 @@ GameObject:
   - component: {fileID: 470019748}
   - component: {fileID: 470019747}
   - component: {fileID: 470019750}
+  - component: {fileID: 470019751}
   m_Layer: 0
   m_Name: Room2_Door
   m_TagString: Door
@@ -17489,6 +17490,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDuration: 1
   doorHinge: {fileID: 470019746}
+--- !u!65 &470019751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470019745}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.056931, y: 2.098418, z: 0.15871}
+  m_Center: {x: -0.52694654, y: -0.90949404, z: 0.028386908}
 --- !u!1 &478468854
 GameObject:
   m_ObjectHideFlags: 0
@@ -49668,7 +49690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseStartTrigger: {fileID: 1451390839}
   chaseEndTrigger: {fileID: 1828769113}
-  chaseSpeed: 3.5
+  chaseSpeed: 3
   isChasing: 0
 --- !u!195 &1307650676
 NavMeshAgent:
@@ -57899,7 +57921,7 @@ Transform:
   m_GameObject: {fileID: 1555731772}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.022755675, z: -0, w: 0.99974114}
-  m_LocalPosition: {x: -4.7, y: 1.054, z: -11.2}
+  m_LocalPosition: {x: -4.625, y: 1.054, z: -11.199}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68755,6 +68777,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.676
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d50f1d5de3dacd44fa27385661586e74, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74345,6 +74371,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aaddffe38381a60428eb1aeab1ba8b85, type: 2}
+    - target: {fileID: 5866666021909216657, guid: f1e8e1bfafe7fa241ba6b4181f3eba85, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e3876af0d600e7b4dae7d01d836c869a, type: 2}
     - target: {fileID: 6027369803899018324, guid: f1e8e1bfafe7fa241ba6b4181f3eba85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0000005532057
