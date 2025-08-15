@@ -195,7 +195,7 @@ public class DoorPassword : MonoBehaviour
                 if (!hasShownMessage2)
                 {
                     SoundManager.instance.PlaySE("doorUnlock");
-                    GuideTextManager.Instance.ShowMessage("2번방 안내메세지");
+                    GuideTextManager.Instance.ShowMessage("문이 열렸다.");
                     hasShownMessage2 = true;
                 }
             }
@@ -230,7 +230,8 @@ public class DoorPassword : MonoBehaviour
                 if (!hasShownMessage3)
                 {
                     SoundManager.instance.PlaySE("doorUnlock");
-                    GuideTextManager.Instance.ShowMessage("3번방 안내메세지");
+                    GuideTextManager.Instance.ShowMessage("문이 열렸다.");
+                    GuideTextManager.Instance.ShowMessage("바닥에 위험한 구멍들이 있다. 떨어지면 다칠 것 같으니 조심하자.");
                     hasShownMessage3 = true;
                 }
             }
@@ -265,7 +266,7 @@ public class DoorPassword : MonoBehaviour
                 if (!hasShownMessage4)
                 {
                     SoundManager.instance.PlaySE("doorUnlock");
-                    GuideTextManager.Instance.ShowMessage("4번방 안내메세지");
+                    GuideTextManager.Instance.ShowMessage("문이 열렸다.");
                     hasShownMessage4 = true;
                 }
             }
@@ -299,7 +300,7 @@ public class DoorPassword : MonoBehaviour
                 if (!hasShownMessage5)
                 {
                     SoundManager.instance.PlaySE("doorUnlock");
-                    GuideTextManager.Instance.ShowMessage("5번방 안내메세지");
+                    GuideTextManager.Instance.ShowMessage("문이 열렸다. 불길한 기운이 감돈다.");
                     hasShownMessage5 = true;
                 }
             }
@@ -334,7 +335,7 @@ public class DoorPassword : MonoBehaviour
                 if (!hasShownMessage6)
                 {
                     SoundManager.instance.PlaySE("doorUnlock");
-                    GuideTextManager.Instance.ShowMessage("6번방 안내메세지");
+                    GuideTextManager.Instance.ShowMessage("문이 열렸다.");
                     hasShownMessage6 = true;
                 }
             }

@@ -10,10 +10,11 @@ public class MonsterChaser : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform target;
-    private bool isChasing = false;
-
+    public bool isChasing = false;
+    Animator animator;
     private void Start()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -27,11 +28,13 @@ public class MonsterChaser : MonoBehaviour
 
     public void StartChase(Transform chaseTarget)
     {
+        
         SoundManager.instance.PlayBGM("chaseBGM");
         target = chaseTarget;
         isChasing = true;
         agent.speed = chaseSpeed;
         chaseStartTrigger.SetActive(false);
+        animator.SetBool("Running", true);
     }
     public void PauseChase()
     {
@@ -40,6 +43,7 @@ public class MonsterChaser : MonoBehaviour
         agent.ResetPath();
         chaseStartTrigger.SetActive(true);
         chaseEndTrigger.SetActive(true);
+        animator.SetBool("Running", false);
     }
     public void StopChase()
     {
@@ -49,5 +53,6 @@ public class MonsterChaser : MonoBehaviour
         gameObject.SetActive(false);
         chaseStartTrigger.SetActive(false);
         chaseEndTrigger.SetActive(false);
+        animator.SetBool("Running", false);
     }
 }

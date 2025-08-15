@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
+
+        SoundManager.instance.PlayBGM("mainBGM");
     }
     void Update()
     {
