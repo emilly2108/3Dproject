@@ -9,7 +9,6 @@ public class GuideTextManager : MonoBehaviour
 
     public Text descText;
 
-    // 인스펙터에서 입력받을 문자열 리스트
     [SerializeField]
     private List<string> messages; // 메시지 리스트
 
@@ -18,7 +17,7 @@ public class GuideTextManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {

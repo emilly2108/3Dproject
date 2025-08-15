@@ -9,6 +9,7 @@ public class StartMenuManager : MonoBehaviour
         if (settingsUI != null)
             settingsUI.SetActive(false);
         SoundManager.instance.PlayBGM("startBGM");
+        SettingManager.LoadSettings();
     }
     public void LoadStartScene()
     {
