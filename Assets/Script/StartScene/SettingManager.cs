@@ -9,7 +9,12 @@ public class SettingManager : MonoBehaviour
     [Header("UI References")]
     public Slider bgmSlider;
     public Slider seSlider;
-    public TMP_Dropdown windowModeDropdown; 
+    public TMP_Dropdown windowModeDropdown;
+
+    public Slider brightnessSlider; 
+    public UnityEngine.Rendering.Volume volume; 
+    private UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
+    private float defaultExposure = 0f;
 
     void Awake()
     {
@@ -47,8 +52,17 @@ public class SettingManager : MonoBehaviour
 
         
         OnWindowModeChanged(windowModeDropdown.value);
+        if (volume != null && volume.profile.TryGet(out colorAdjustments))
+        {
+            defaultExposure = colorAdjustments.postExposure.value;
+        }
 
-        
+        if (brightnessSlider != null)
+        {
+            brightnessSlider.onValueChanged.AddListener(OnBrightnessChanged);
+        }
+
+
         bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
         seSlider.onValueChanged.AddListener(OnSeVolumeChanged);
         windowModeDropdown.onValueChanged.AddListener(OnWindowModeChanged);
@@ -92,11 +106,21 @@ public class SettingManager : MonoBehaviour
         }
     }
 
+    private void OnBrightnessChanged(float value)
+    {
+        if (colorAdjustments != null)
+        {
+            colorAdjustments.postExposure.value = Mathf.Lerp(-2f, 2f, value);
+        }
+    }
+
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat("BGM_Volume", bgmSlider.value);
         PlayerPrefs.SetFloat("SE_Volume", seSlider.value);
         PlayerPrefs.SetInt("WindowMode", windowModeDropdown.value);
+        PlayerPrefs.SetFloat("Brightness", brightnessSlider.value);
+
         PlayerPrefs.Save();
         Debug.Log("환경설정 저장 완료");
     }
@@ -117,5 +141,11 @@ public class SettingManager : MonoBehaviour
             windowModeDropdown.value = PlayerPrefs.GetInt("WindowMode");
         else
             windowModeDropdown.value = GetDropdownIndexFromScreenMode(Screen.fullScreenMode);
+
+        if (PlayerPrefs.HasKey("Brightness"))
+            brightnessSlider.value = PlayerPrefs.GetFloat("Brightness");
+        else
+            brightnessSlider.value = 0.5f;
+
     }
 }
