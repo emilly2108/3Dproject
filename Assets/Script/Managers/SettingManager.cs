@@ -1,71 +1,69 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using System.Collections.Generic;
 
 public class SettingManager : MonoBehaviour
-{
-    public static SettingManager instance;
+{   //✅
+    public static SettingManager Instance { get; private set; }
 
-    [Header("UI References")]
+    [Header("음량")]
     public Slider bgmSlider;
     public Slider seSlider;
-    public TMP_Dropdown windowModeDropdown;
 
-    public Slider brightnessSlider; 
-    public UnityEngine.Rendering.Volume volume; 
-    private UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
+    [Header("디스플레이")]
+    public TMP_Dropdown windowModeDropdown;
+    public Slider brightnessSlider;
+
+    [Header("밝기")]
+    public Volume volume;
+    private ColorAdjustments colorAdjustments;
     private float defaultExposure = 0f;
 
-    void Awake()
+    private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        
-        windowModeDropdown.ClearOptions();
-        windowModeDropdown.AddOptions(new System.Collections.Generic.List<string>
-        {
-            "��ü ȭ��",
-            "â ���",
-            "��ü â"
-        });
-
+        InitDropdown();
         LoadSettings(); 
 
-        
+    
         if (SoundManager.instance != null)
         {
             SoundManager.instance.BGM_masterVolume = bgmSlider.value;
             SoundManager.instance.SE_masterVolume = seSlider.value;
         }
 
-        
+
         OnWindowModeChanged(windowModeDropdown.value);
+
         if (volume != null && volume.profile.TryGet(out colorAdjustments))
         {
             defaultExposure = colorAdjustments.postExposure.value;
         }
 
-        if (brightnessSlider != null)
-        {
-            brightnessSlider.onValueChanged.AddListener(OnBrightnessChanged);
-        }
-
-
         bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
         seSlider.onValueChanged.AddListener(OnSeVolumeChanged);
+        brightnessSlider.onValueChanged.AddListener(OnBrightnessChanged);
         windowModeDropdown.onValueChanged.AddListener(OnWindowModeChanged);
+    }
+
+    private void InitDropdown()
+    {
+        windowModeDropdown.ClearOptions();
+        windowModeDropdown.AddOptions(new List<string> { "전체 화면", "창 모드", "전체 창" });
     }
 
     private void OnBgmVolumeChanged(float value)
@@ -95,6 +93,7 @@ public class SettingManager : MonoBehaviour
                 break;
         }
     }
+
     private int GetDropdownIndexFromScreenMode(FullScreenMode mode)
     {
         switch (mode)
@@ -114,38 +113,46 @@ public class SettingManager : MonoBehaviour
         }
     }
 
-    public void SaveSettings()
+    public static void SaveSettings()
     {
-        PlayerPrefs.SetFloat("BGM_Volume", bgmSlider.value);
-        PlayerPrefs.SetFloat("SE_Volume", seSlider.value);
-        PlayerPrefs.SetInt("WindowMode", windowModeDropdown.value);
-        PlayerPrefs.SetFloat("Brightness", brightnessSlider.value);
+        if (Instance == null) return;
+
+        PlayerPrefs.SetFloat("BGM_Volume", Instance.bgmSlider.value);
+        PlayerPrefs.SetFloat("SE_Volume", Instance.seSlider.value);
+        PlayerPrefs.SetInt("WindowMode", Instance.windowModeDropdown.value);
+        PlayerPrefs.SetFloat("Brightness", Instance.brightnessSlider.value);
 
         PlayerPrefs.Save();
-        Debug.Log("ȯ�漳�� ���� �Ϸ�");
+        Debug.Log("환경설정 저장 완료");
     }
 
-    private void LoadSettings()
+    public static void LoadSettings()
     {
+        if (Instance == null) return;
+
         if (PlayerPrefs.HasKey("BGM_Volume"))
-            bgmSlider.value = PlayerPrefs.GetFloat("BGM_Volume");
+            Instance.bgmSlider.value = PlayerPrefs.GetFloat("BGM_Volume");
         else
-            bgmSlider.value = 1f;
+            Instance.bgmSlider.value = 1f;
+        Instance.OnBgmVolumeChanged(Instance.bgmSlider.value);
 
         if (PlayerPrefs.HasKey("SE_Volume"))
-            seSlider.value = PlayerPrefs.GetFloat("SE_Volume");
+            Instance.seSlider.value = PlayerPrefs.GetFloat("SE_Volume");
         else
-            seSlider.value = 1f;
+            Instance.seSlider.value = 1f;
+        Instance.OnSeVolumeChanged(Instance.seSlider.value); 
 
         if (PlayerPrefs.HasKey("WindowMode"))
-            windowModeDropdown.value = PlayerPrefs.GetInt("WindowMode");
+            Instance.windowModeDropdown.value = PlayerPrefs.GetInt("WindowMode");
         else
-            windowModeDropdown.value = GetDropdownIndexFromScreenMode(Screen.fullScreenMode);
+            Instance.windowModeDropdown.value = Instance.GetDropdownIndexFromScreenMode(Screen.fullScreenMode);
+        Instance.OnWindowModeChanged(Instance.windowModeDropdown.value);
 
         if (PlayerPrefs.HasKey("Brightness"))
-            brightnessSlider.value = PlayerPrefs.GetFloat("Brightness");
+            Instance.brightnessSlider.value = PlayerPrefs.GetFloat("Brightness");
         else
-            brightnessSlider.value = 0.5f;
-
+            Instance.brightnessSlider.value = 0.5f;
+        Instance.OnBrightnessChanged(Instance.brightnessSlider.value); 
     }
+
 }
