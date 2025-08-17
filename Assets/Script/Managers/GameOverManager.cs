@@ -4,7 +4,9 @@ public class GameOverManager : MonoBehaviour
 {
     private void Start()
     {
+        SettingManager.LoadSettings();
         SoundManager.instance.PlayBGM("gameOverBGM");
+
     }
     public void StartScene()
     {
