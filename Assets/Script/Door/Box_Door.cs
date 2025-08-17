@@ -12,7 +12,7 @@ public class Box_Door : MonoBehaviour
     private GameObject[] Box_Doors;
     [SerializeField]
     private openBox_Door[] openBox_Door;
-    public int numberofBox_Door = 4;
+    public int numberofBox_Door = 5;
 
     public bool[] Show;
     public bool[] Solve;
