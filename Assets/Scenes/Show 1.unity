@@ -5783,6 +5783,7 @@ MonoBehaviour:
   pauseUI: {fileID: 781716054}
   playerController: {fileID: 1555731778}
   settingsUI: {fileID: 2026700425}
+  quizUIManager: {fileID: 1967930489}
 --- !u!4 &200045293
 Transform:
   m_ObjectHideFlags: 0
@@ -73417,6 +73418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1967930488}
+  - component: {fileID: 1967930489}
   m_Layer: 5
   m_Name: Quiz
   m_TagString: Untagged
@@ -73452,6 +73454,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1967930489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967930487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0d10718895cae4fbb5464288fdd643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1968106755
 GameObject:
   m_ObjectHideFlags: 0
@@ -75524,8 +75538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b1c99997908c142a6e27b7676ec0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundSlider: {fileID: 661039089}
-  windowModeDropdown: {fileID: 1810194748}
 --- !u!114 &2026700428
 MonoBehaviour:
   m_ObjectHideFlags: 0
