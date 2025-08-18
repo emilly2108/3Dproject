@@ -31,4 +31,9 @@ public class StartMenuManager : MonoBehaviour
         if (settingsUI != null)
             settingsUI.SetActive(false);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

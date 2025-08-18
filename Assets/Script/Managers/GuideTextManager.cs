@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 
 public class GuideTextManager : MonoBehaviour
-{//✅
+{
     public static GuideTextManager Instance { get; private set; } // 싱글톤 인스턴스
 
-    public Text descText;
+    public TextMeshProUGUI descText; // Text 컴포넌트를 TextMeshProUGUI로 변경
 
     [SerializeField]
     private List<string> messages; // 메시지 리스트
