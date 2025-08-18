@@ -199,7 +199,7 @@ public class Door : MonoBehaviour
                     {
                         playerController.UnlockMovement();
                         playerController.isMoveable = true;
-                        Debug.Log("움직임 해제");
+                        
                     }
                     quizUI.SetActive(false);
                     isShow = false;

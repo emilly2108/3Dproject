@@ -6,6 +6,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseUI;
     [SerializeField] PlayerController playerController;
     [SerializeField] private GameObject settingsUI;
+    [SerializeField] private QuizUIManager quizUIManager;
     private bool isPaused = false;
 
     private void Update()
@@ -29,7 +30,9 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        playerController.SetCanMove(true);  // 이동 허용
+        if (quizUIManager.AllQuizInactive)
+            playerController.SetCanMove(true);  // 이동 허용
+  
         isPaused = false;
         Time.timeScale = 1f;
         pauseUI.SetActive(false);
