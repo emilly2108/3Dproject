@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class Sound
 }
 
 public class SoundManager : MonoBehaviour
-{
+{   //âœ…
     public static SoundManager instance;
 
     #region singleton
@@ -35,9 +35,9 @@ public class SoundManager : MonoBehaviour
     public Sound[] bgmSounds;
 
     [SerializeField, Range(0f, 1f)]
-    private float bgmMasterVolume = 1f; // ±âº» 100%
+    private float bgmMasterVolume = 1f; // ê¸°ë³¸ 100%
     [SerializeField, Range(0f, 1f)]
-    private float seMasterVolume = 1f;  // ±âº» 100%
+    private float seMasterVolume = 1f;  // ê¸°ë³¸ 100%
 
     public float BGM_masterVolume
     {
@@ -97,11 +97,11 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("¸ğµç °¡¿ë AudioSource »ç¿ëÁß");
+                Debug.Log("ëª¨ë“  ê°€ìš© AudioSource ì‚¬ìš©ì¤‘");
                 return;
             }
         }
-        Debug.Log(_name + " »ç¿îµå°¡ SoundManager¿¡ µî·Ï¾ÈµÊ");
+        Debug.Log(_name + " ì‚¬ìš´ë“œê°€ SoundManagerì— ë“±ë¡ì•ˆë¨");
     }
 
     public void StopAllSE()
@@ -122,7 +122,7 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("Àç»ı ÁßÀÎ " + _name + " »ç¿îµå°¡ ¾ø½À´Ï´Ù");
+        Debug.Log("ì¬ìƒ ì¤‘ì¸ " + _name + " ì‚¬ìš´ë“œê°€ ì—†ìŠµë‹ˆë‹¤");
     }
 
     public void PlayBGM(string _name, bool loop = true)
@@ -141,7 +141,7 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogWarning(_name + " BGMÀÌ SoundManager¿¡ µî·ÏµÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.");
+        Debug.LogWarning(_name + " BGMì´ SoundManagerì— ë“±ë¡ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.");
     }
 
     public void StopBGM()

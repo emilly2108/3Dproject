@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 [System.Serializable]
@@ -137,6 +138,7 @@ public class ItemEffectDatabase : MonoBehaviour
                 if (hit.transform.CompareTag("MainDoor"))
                 {
                     Debug.Log("Å»Ãâ, ¿£µù");
+                    SceneManager.LoadScene("EndingScene");
                 }
             }
         }

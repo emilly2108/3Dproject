@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         applyCrouchPosY = originPosY;
 
         SoundManager.instance.PlayBGM("mainBGM");
+        SettingManager.LoadSettings();
     }
     void Update()
     {
